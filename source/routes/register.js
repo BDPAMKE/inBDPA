@@ -115,8 +115,7 @@ router.get('/', function(req, res, next) {
       newUser.email=body.email;
       newUser.salt=saltString;
       newUser.key=keyString;
-      newUser.blogName=body.blogname;
-      newUser.type="blogger";
+      newUser.type="inner";
       var newUserBody=JSON.stringify(newUser);
       //console.log("generator call", newUserBody);
         const fetch = require('node-fetch'); //We may need to npm install this...
