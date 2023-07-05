@@ -16,10 +16,11 @@ router.get('/', function(req, res, next) {
  {
   //console.log("REST CALL ", data);
       if (data.success){
-        var blogcount=data.info.blogs;
-        var pagecount=data.info.pages;
+        var oppcount=data.info.opportunities;
+        var sessioncount=data.info.sessions;
         var usercount=data.info.users;
-        res.render('userdata', { title: 'User Data Page', blogs: blogcount, pages:pagecount, users:usercount });
+        var viewcount=data.info.views;
+        res.render('userdata', { title: 'User Data Page', opportunities: oppcount, sessions:sessioncount, users:usercount, views:viewcount });
       }
       else{
         res.render('error', {title: "API Failed"});
