@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head') -%> <!-- head partial -->
+  </head>
+  <body>
+
+    
+    <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
+
+    <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
+    <h1 class="text-center">  <%= title %></h1>
+    <p class="text-center"> Welcome, <%= name %></p>
+    <%- include('./partials/footer') -%> <!-- includes footer partial -->
+    <p class="text-center"> <a href="userdata"> Get user count</a></p>
+    <p class="text-center"> <a href="users"> Get user list</a></p>
+    <p class="text-center"> <a href="logout"> Logout</a></p>
+  </body>
+</html>

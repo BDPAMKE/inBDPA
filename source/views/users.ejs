@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head') -%> <!-- head partial -->
+  </head>
+  <body>
+    
+    <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
+
+    <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
+    <h1 class="text-center">  <%= title %></h1>
+    <p class="text-center"> Welcome to <%= title %></p>
+    <div class="table-responsive">
+    <table class="table table-hover">
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Type</th>
+        <th>User ID</th>
+        <th>Blog Name</th>
+      </tr>
+      <%for (var result in resultarray){%>
+        <tr>
+        <td> <%= resultarray[result].username %> </td> 
+        <td> <%= resultarray[result].email %> </td>
+        <td> <%= resultarray[result].type %> </td>
+        <td> <%= resultarray[result].user_id %> </td>
+        <%if (resultarray[result].type == "blogger") {%>
+        <td> 
+            <a href="/blogs/<%= resultarray[result].blogName %>">
+            <%= resultarray[result].blogName %> </a>
+        </td>
+        <%}%>
+        </tr> 
+        <%}%>
+    </table>
+    </div>
+      
+    <%- include('./partials/footer') -%> <!-- includes footer partial -->
+  </body>
+</html>

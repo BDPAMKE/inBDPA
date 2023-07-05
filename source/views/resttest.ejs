@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%- include('./partials/head') -%> <!-- head partial -->
+
+<style>
+body 
+form {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #0a4bc4;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+
+</style>
+</head>
+<body>
+  <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
+
+
+<h2>Test RestAPI:  <%= title %></h2>
+
+<form action="/resttest" method="POST">
+
+  <div class="container">
+    <div>
+    <label for="method"><b>method (GET,POST,PATCH,DELETE)</b></label>
+    <input type="text" placeholder="Enter Rest Method" name="method" required>
+    </div>
+    <div>
+    <label for="url"><b>url</b></label>
+    <input type="text" placeholder="Enter url" name="url" required>
+    </div>
+    <div>
+    <label for="body"><b>body (Add a Body ONLY IF THE METHOD IS A POST OR PATCH!)</b></label>
+    <input type="text" placeholder="Enter body if method is a Post, Patch" name="body" rows="10" cols="50"  > 
+   </div
+   <div>
+    <button type="submit">Call RestAPI</button>
+   </div>
+   
+  </div>
+
+  
+</form>
+
+<%= results %>
+
+</body>
+</html>
