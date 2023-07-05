@@ -17,7 +17,7 @@
         <th>Email</th>
         <th>Type</th>
         <th>User ID</th>
-        <th>Blog Name</th>
+        <!-- <th>Blog Name</th> -->
       </tr>
       <%for (var result in resultarray){%>
         <tr>
@@ -25,12 +25,11 @@
         <td> <%= resultarray[result].email %> </td>
         <td> <%= resultarray[result].type %> </td>
         <td> <%= resultarray[result].user_id %> </td>
-        <%if (resultarray[result].type == "blogger") {%>
-        <td> 
-            <a href="/blogs/<%= resultarray[result].blogName %>">
-            <%= resultarray[result].blogName %> </a>
+        <td>
+            <img src="https://www.gravatar.com/avatar/
+            <%= resultarray[result].gravatar  %>
+            ?d=identicon">
         </td>
-        <%}%>
         </tr> 
         <%}%>
     </table>
