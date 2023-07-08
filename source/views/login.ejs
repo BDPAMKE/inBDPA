@@ -33,8 +33,17 @@ button:hover {
 
 
 </style>
+<script>
+  function GenerateCaptcha(){
+    var num1=Math.floor((Math.random()*10)+1);
+    var num2=Math.floor((Math.random()*10)+1);
+    var html="Calculate: " + num1 + "+" + num2 + "=:";
+    document.getElementById("captchalabel").innerHTML=html;
+    return true;
+  }
+  </script>
 </head>
-<body>
+<body onload="GenerateCaptcha()">
   <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
 
 
@@ -48,9 +57,18 @@ button:hover {
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
-        
+
     <button type="submit">Login</button>
     <label>
+
+    <div class="container">
+    <label for="CAPTCHA" id="captchalabel"><b></b></label>
+    <input type="text" placeholder="Enter Captcha" name="CAPTCHA" require>
+    <button class="captcha refresh">
+      <i class="fa fa-refresh"></i>
+    </button>
+    
+
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
   </div>
@@ -60,6 +78,5 @@ button:hover {
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div>
 </form>
-
 </body>
 </html>
