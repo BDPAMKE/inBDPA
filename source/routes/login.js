@@ -139,7 +139,7 @@ router.post('/', async(req, res, next) => {
       res.render('admin', {title:'Admin Login Successful', message: 'Welcome to the admin page', name:userName});
       }
       else{
-        res.render('editblogpage',{title:'Login successful'});
+        res.render('index',{title:'Login successful'});
       }
 
     }
