@@ -12,32 +12,33 @@ router.get('/', function(req, res, next) {
 
 router.post('/', async(req, res, next) => {
   
-    
+  console.log('hit post register route' )
 
     if (!req.body.captcha)
     return res.json({ success: false, msg: 'Please select captcha' });
 
   // Secret key
-  const secretKey = '6LfJLBMnAAAAAOWmTyLkvueCGXzZP-OR0I72bFPm';
-
+  const secretKey = '6LfJLBMnAAAAAKjjch9r9js3pNwztMCvo6J-gvuK';
+ 
   // Verify URL
-  const query = stringify({
+  const query = ({
     secret: secretKey,
     response: req.body.captcha,
-    remoteip: req.connection.remoteAddress
+    remoteip: req.socket.remoteAddress
+    //remoteip: req.connection
   });
-  const verifyURL = `https://google.com/recaptcha/api/siteverify?${query}`;
-
+  const verifyURL = `https://google.com/recaptcha/api/siteverify?${secretKey}&response=${req.body.captcha}`;
+  
   // Make a request to verifyURL
   const body = await fetch(verifyURL).then(res => res.json());
-
+  console.log("secret ", body.success)
   // If not successful
   if (body.success !== undefined && !body.success){
-      Console.log('res.json', res,json);
+      //console.log('captcha verification', body);
    // return res.json({ success: false, msg: 'Failed captcha verification' })};
 
   // If successful
-  Console.log('res.json', res,json)
+  //console.log('captcha verification', body)
   //return res.json({ success: true, msg: 'Captcha passed' });
   
       // The API expects a 64 byte key (128 hex digits long):
