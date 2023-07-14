@@ -10,11 +10,37 @@ router.get('/', function(req, res, next) {
   res.render('register', { title: 'Register' });
 });
 
-  router.post('/', async(req, res, next) => {
-    console.log(JSON.stringify(req.body));
+router.post('/', async(req, res, next) => {
   
     
-    // The API expects a 64 byte key (128 hex digits long):
+
+    if (!req.body.captcha)
+    return res.json({ success: false, msg: 'Please select captcha' });
+
+  // Secret key
+  const secretKey = '6LfJLBMnAAAAAOWmTyLkvueCGXzZP-OR0I72bFPm';
+
+  // Verify URL
+  const query = stringify({
+    secret: secretKey,
+    response: req.body.captcha,
+    remoteip: req.connection.remoteAddress
+  });
+  const verifyURL = `https://google.com/recaptcha/api/siteverify?${query}`;
+
+  // Make a request to verifyURL
+  const body = await fetch(verifyURL).then(res => res.json());
+
+  // If not successful
+  if (body.success !== undefined && !body.success){
+      Console.log('res.json', res,json);
+   // return res.json({ success: false, msg: 'Failed captcha verification' })};
+
+  // If successful
+  Console.log('res.json', res,json)
+  //return res.json({ success: true, msg: 'Captcha passed' });
+  
+      // The API expects a 64 byte key (128 hex digits long):
   const KEY_SIZE_BYTES = 64;
   // The API expects a 16 byte salt (32 hex digits long):
   const SALT_SIZE_BYTES = 16;
@@ -152,6 +178,7 @@ router.get('/', function(req, res, next) {
   
     
     //res.render('register', { title: 'Products R Us Post-Register' });
-  });
+  }
+})
 
 module.exports = router;
