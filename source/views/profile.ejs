@@ -16,18 +16,21 @@
     </script>
     <title><%= title %></title>
   </head>
-  
   <body>
-
-    
     <%- include('./partials/head') %> <!-- head partial -->
 
-    <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
     <h1 class="text-center">  <%= title %></h1>
-    <p class="text-center"> Welcome, <%= name %></p>
+    <p class="text-center"> Welcome to <%= title %></p>
+
+    <h3>Username: <%= user.username %></h3>
+    <h3>Type: <%= user.type %></h3>
+    <h3>About: <%= user.sections.about %></h3>
+    <h3>Views: <%= user.views %></h3>
+    <h3>Experience: <%= user.sections.experience %></h3>
+    <h3>Education: <%= user.sections.education %></h3>
+    <h3>Volunteering: <%= user.sections.volunteering %></h3>
+    <h3>Skills: <%= user.sections.skills %></h3>
+
     <%- include('./partials/footer') -%> <!-- includes footer partial -->
-    <p class="text-center"> <a href="userdata"> Get user count</a></p>
-    <p class="text-center"> <a href="users"> Get user list</a></p>
-    <p class="text-center"> <a href="logout"> Logout</a></p>
   </body>
 </html>

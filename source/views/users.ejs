@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%- include('./partials/head') -%> <!-- head partial -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+      crossorigin="anonymous">
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
+      crossorigin="anonymous">
+    </script>
+    <title><%= title %></title>
   </head>
   <body>
     
-    <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
+    <%- include('./partials/head') %> <!-- head partial -->
 
     <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
     <h1 class="text-center">  <%= title %></h1>
@@ -21,16 +34,22 @@
       </tr>
       <%for (var result in resultarray){%>
         <tr>
-        <td> <%= resultarray[result].username %> </td> 
-        <td> <%= resultarray[result].email %> </td>
-        <td> <%= resultarray[result].type %> </td>
-        <td> <%= resultarray[result].user_id %> </td>
-        <%if (resultarray[result].type == "blogger") {%>
-        <td> 
-            <a href="/blogs/<%= resultarray[result].blogName %>">
-            <%= resultarray[result].blogName %> </a>
-        </td>
-        <%}%>
+          <td> 
+            <img src="https://www.gravatar.com/avatar/
+            <%= resultarray[result].gravatar  %>
+            ?d=identicon">
+          </td>
+          <td>
+            <a
+            href="/profile/<%= resultarray[result].user_id %>"
+            id="<% resultarray[result].user_id %>"
+            style="text-decoration: none; color: black"
+            ><%= resultarray[result].username %> </a
+            >
+          </td> 
+          <td> <%= resultarray[result].email %> </td>
+          <td> <%= resultarray[result].type %> </td>
+          <td> <%= resultarray[result].user_id %> </td>
         </tr> 
         <%}%>
     </table>
