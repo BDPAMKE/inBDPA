@@ -34,61 +34,33 @@ button:hover {
 
 </style>
 
-  <script>
-  (function(){
-    const fonts = ["cursive"];
-    let captchaValue = "";
-    function gencaptcha()
-    {
-        let value = btoa(Math.random()*1000000000);
-        value = value.substr(0,5 + Math.random()*5);
-        captchaValue = value;
-    }
-  ,
-  
-    function setcaptcha()
-    {
-        let html = captchaValue.split("").map((char)=>{
-            const rotate = -20 + Math.trunc(Math.random()*30);
-            const font = Math.trunc(Math.random()*fonts.length);
-            return`<span
-            style="
-            transform:rotate(${rotate}deg);
-            font-family:${font[font]};
-            "
-           >${char} </span>`;
-        }).join("");
-        document.querySelector(".login_form #captcha .preview").innerHTML = html;
-    }
-  
-    function initCaptcha()
-    {
-        document.querySelector(".login_form #captcha .captcha_refersh").addEventListener("click",function(){
-            gencaptcha();
-            setcaptcha();
-        });
-  
-        gencaptcha();
-        setcaptcha();
-    }
-    initCaptcha();
-  
-    document.querySelector(".login_form .form_button").addEventListener("click",function(){
-        let inputcaptchavalue = document.querySelector(".login_form #captcha input").value;
-  
-        if (inputcaptchavalue === captchaValue) 
-        {
-            // swal("","Log in","success");
-            alert("Log in success");
-        }
-        else
-        {
-            // swal("Invalid Captcha");
-            alert("Invalid Captcha");
-        }
-    });
-  })();
-</script>
+<script>
+  function GenerateCaptcha(){
+    var num1=Math.floor((Math.random()*10)+1);
+    var num2=Math.floor((Math.random()*10)+1);
+    document.getElementById("num1").innerHTML=num1;
+    document.getElementById("num2").innerHTML=num2;
+    return true;
+  }
+  function CheckCaptcha(){
+      var num1=1*document.getElementById("num1").innerHTML;
+      console.log(num1);
+      var num2=1*document.getElementById("num2").innerHTML;
+      console.log(num2);
+      var answer=document.forms["loginform"]["captchanumber"].value;
+      console.log(answer);
+      if (num1+num2==answer){
+          return true;
+      }
+      else{
+          alert("Incorrect Captcha");
+          GenerateCaptcha();
+          loginform.reset();
+          return false;
+      }
+
+  }
+  </script>
 </head>
 
 <body onload="GenerateCaptcha()">
@@ -97,14 +69,20 @@ button:hover {
 
 <h2>Login Form</h2>
 
-<form action="/login" method="POST">
+<form action="/login" name="loginform" id="loginform" onsubmit="return CheckCaptcha()" method="POST">
 
   <div class="container">
     <label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="uname" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="psw" required>\
+    
+    <div class="form-floating">
+      <input type="number" class="form-control" id="captchanumber" name="captchanumber" placeholder=""  maxlength="25"
+       required>
+      <label for="captchanumber">Calculate <span id="num1"> 1 </span> + <span id="num2"> 2 </span> = </label>
+      </div>
 
     <button type="submit">Login</button>
     <label>
@@ -120,11 +98,7 @@ button:hover {
   
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div>
-  <div class="form-floating">
-    <input type="number" class="form-control" id="captchanumber" name="captchanumber" placeholder=""  maxlength="25"
-     required>
-    <label for="captchanumber">Calculate <span id="num1"> 1 </span> + <span id="num2"> 2 </span> = </label>
-    </div>
+
 </form>
 
 
