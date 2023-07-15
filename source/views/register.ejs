@@ -1,5 +1,21 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+      crossorigin="anonymous">
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
+      crossorigin="anonymous">
+    </script>
+    <title><%= title %></title>
+  </head>
 
 <head>
 <%- include('./partials/head') -%>
@@ -38,30 +54,66 @@
 <%- include('./partials/header') -%>
 </header>
 
-<div class="container my-5">
-<div class="row">
-<div class="col-md-6 mx-auto">
+      <br />
 
 <form name="registerform" id="registerform" action="/register" onsubmit="return CheckCaptcha()" method="POST">
 
-<h1 class="h3 mb-3 fw-normal">Please Register Below</h1>
+        <!-- Username input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="registerUsername">Username</label>
+        <input
+          type="text"
+          name="registerUsername"
+          id="registerUsername"
+          class="form-control"
+          pattern="([a-z0-9]){4,16}" 
+          required
+          />
+          <div id="passwordHelpBlock" class="form-text">
+            <ul>
+              <li>All Lowercase</li>
+              <li>Only Letters or Numbers</li>
+              <li>4 - 16 Characters.</li>
+            </ul>
+          </div>
+          <div class="invalid-feedback">Example invalid feedback text</div>
+        </div>
 
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="registerEmail">Email address</label>
+            <input
+              type="email"
+              name="registerEmail"
+              id="registerEmail"
+              class="form-control"
+              value=""
+            />
+          </div>
 
-<div class="form-floating">
-<input type="text" class="form-control" id="username" name="username" placeholder="User Name"  required>
-<label for="username">User Name</label>
-</div>
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="registerPassword">Password</label>
+          <input
+            type="password"
+            name="registerPassword"
+            id="registerPassword"
+            class="form-control"
+            value=""
+          />
+        </div>
 
 <div class="form-floating">
 <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
 <label for="email">Email address</label>
 </div>
 
-<div class="form-floating">
-<input type="password" class="form-control" id="password" name="password" placeholder="Password"  maxlength="25" requiredlength="5"
- title="Password must be at least 11 characters 11. A strong password is above 17 characters." required>
-<label for="password">Password</label>
-</div>
+        <!-- Submit button -->
+        <div class="col d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary btn-block mb-4">
+            Register
+          </button>
+        </div>
 
 <div class="form-floating">
     <input type="number" class="form-control" id="captchanumber" name="captchanumber" placeholder=""  maxlength="25"
@@ -72,14 +124,14 @@
 <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
 </form>
 
-</div>
-</div>
-</div>
+        <!-- Change to Login -->
+        <div class="text-center">
+          <p>Already have an account? <a href="/login">Log in</a></p>
+        </div>
+      </form>
+    </div>
+  </body>
 
-<footer>
-<%- include('./partials/footer') -%>
-</footer>
-
-</body>
+  <%- include("./partials/footer.ejs") %> <!-- Footer Partial -->
 
 </html>
