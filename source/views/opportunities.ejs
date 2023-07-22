@@ -21,10 +21,13 @@
       <body>
         <%- include("./partials/header.ejs") %>
 
+        <% var lastOpportunity = 0; %>
 
-        <% if (opportunities !== null) { %> <%opportunities.forEach(function(opportunity){%>
+        <% if (opportunities !== null) { %> 
+          <%opportunities.forEach(function(opportunity){%>
           <% var created = new Date(opportunity.createdAt); %>
           <% var updated = new Date(opportunity.updatedAt); %>
+          <% lastOpportunity= opportunity.opportunity_id; %>
           <% var time = ""; %>
 
           <% var now = new Date(); %>
@@ -98,6 +101,7 @@
                 </div>
           </section>
           <% }) %>
+          <a href="opportunities?after=<%= lastOpportunity %>"> Next 100</a>
           <% }; %>
     </body>
 </html>
