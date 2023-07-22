@@ -122,19 +122,19 @@ router.post('/', async(req, res, next) => {
   })
   .then(response => response.json())
   .then(async data => {
-    console.log("Message & Data ", data);
+    // console.log("Message & Data ", data);
     if (data.success === false){  //Login Failed
      
         res.render('login', {title:'Login Unsuccessful', message: 'Invalid username or password'});
     }
     else //Login Successful
     {
-      console.log(role);
-      console.log(userID);
+      // console.log(role);
+      // console.log(userID);
       global.userID = userID
       global.role = role
 
-      console.log(userName);
+      // console.log(userName);
       var token = jwt.sign({
         id: userID, role: role, name:userName
           }, process.env.BEARER_TOKEN, {
