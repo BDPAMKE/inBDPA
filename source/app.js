@@ -14,7 +14,7 @@ var registerRouter = require('./routes/register');
 var resttestRouter = require('./routes/resttest');
 var adminRouter = require('./routes/admin');
 var connectcountRouter = require('./routes/connectcount');
-
+var profileedit = require('./routes/profileedit');
 var app = express();
 
 
@@ -37,6 +37,7 @@ app.use('/register', registerRouter);
 app.use('/resttest', resttestRouter);
 app.use('/admin', adminRouter);
 app.use('/connectcount',connectcountRouter);
+app.use('/profileedit',profileedit);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.status(404).render('error', {title:'404 page not found'});
