@@ -1,46 +1,36 @@
 var express = require('express');
 var router = express.Router();
-var MarkdownIt = require('markdown-it'),
-md = new MarkdownIt();
+const crypto = require('crypto');
 
-const httpRequest = require('https');
 const auth = require("../middleware/verifytoken");
+const myGetRestCall = require("../middleware/GetRestAPI");
 
-require('dotenv').config();
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+ // this in you route 
+ const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/mkelen2' //- where the URL is whatever Get RestAPI Request  you are calling
+ const token = process.env.BEARER_TOKEN;
+console.log ("before call",token)
+  //########################################## 
+ //This function will take the two variables and pass them to the Get RestAPI call 
+  myGetRestCall.getWithBearerToken(url, token)
+.then(data => {
+  //data.users.forEach(element => element.gravatar=crypto.createHash('md5').update(element.email).digest("hex"));
+  var results = data
+  console.log('data ',data.user.sections)
+  var about=data.user.sections.about
+  var education=JSON.stringify (data.user.sections.education)
+  var skills=JSON.stringify (data.user.sections.skills)
+  var volunteering=JSON.stringify (data.user.sections.volunteering)
+  var experience=JSON.stringify (data.user.sections.experience)
 
-/* GET opportunities page. */
 
-router.get('/', async (req, res, next) => {
 
-  var opportunityInfo = [];
-
-    const options = {
-    method: 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + process.env.BEARER_TOKEN,
-      'content-type': 'application/json'
-    }};
-
-    const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities'; //Setting uri based on user input
-    
-    fetch(varHttpRequest, options)
-      .then(response => response.json())
-      .then(async data => {
-        if (data.success === false){  
-          res.render('error', { title: 'Error', message: 'Something Went Wrong'});
-          return "error";
-        }
-        else 
-        {
-          opportunityInfo = data.opportunities;
-          res.render('opportunities', { title: 'Opportunities', opportunities: opportunityInfo });
-        }
-      })
-      .catch(error => { //Error in the fetch
-        console.error(error);
-        res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
-        return "error";
-      })
-    })
+  console.log('education',education)
+  res.render('profile', { title: 'User Profile', about:about,education:education,experience:experience,volunteering:volunteering,skills:skills});
+  } 
+)
+.catch(error => console.error(error));
+});
 
 module.exports = router;
