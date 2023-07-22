@@ -34,6 +34,7 @@ button:hover {
 
 </style>
 
+<<<<<<< HEAD
   <script>
   (function(){
     const fonts = ["cursive"];
@@ -89,6 +90,35 @@ button:hover {
     });
   })();
 </script>
+=======
+<script>
+  function GenerateCaptcha(){
+    var num1=Math.floor((Math.random()*10)+1);
+    var num2=Math.floor((Math.random()*10)+1);
+    document.getElementById("num1").innerHTML=num1;
+    document.getElementById("num2").innerHTML=num2;
+    return true;
+  }
+  function CheckCaptcha(){
+      var num1=1*document.getElementById("num1").innerHTML;
+      console.log(num1);
+      var num2=1*document.getElementById("num2").innerHTML;
+      console.log(num2);
+      var answer=document.forms["loginform"]["captchanumber"].value;
+      console.log(answer);
+      if (num1+num2==answer){
+          return true;
+      }
+      else{
+          alert("Incorrect Captcha");
+          GenerateCaptcha();
+          loginform.reset();
+          return false;
+      }
+
+  }
+  </script>
+>>>>>>> origin/main
 </head>
 
 <body onload="GenerateCaptcha()">
@@ -97,14 +127,20 @@ button:hover {
 
 <h2>Login Form</h2>
 
-<form action="/login" method="POST">
+<form action="/login" name="loginform" id="loginform" onsubmit="return CheckCaptcha()" method="POST">
 
   <div class="container">
     <label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="uname" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="psw" required>\
+    
+    <div class="form-floating">
+      <input type="number" class="form-control" id="captchanumber" name="captchanumber" placeholder=""  maxlength="25"
+       required>
+      <label for="captchanumber">Calculate <span id="num1"> 1 </span> + <span id="num2"> 2 </span> = </label>
+      </div>
 
     <button type="submit">Login</button>
     <label>
@@ -120,11 +156,7 @@ button:hover {
   
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div>
-  <div class="form-floating">
-    <input type="number" class="form-control" id="captchanumber" name="captchanumber" placeholder=""  maxlength="25"
-     required>
-    <label for="captchanumber">Calculate <span id="num1"> 1 </span> + <span id="num2"> 2 </span> = </label>
-    </div>
+
 </form>
 
 
