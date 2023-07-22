@@ -34,6 +34,8 @@ router.get('/', auth, async (req, res, next) => {
               else 
               {
                 const opportunityList = data.opportunities;
+                // console.log(length(opportunityList));
+                // console.log(userId);
                 opportunityList.forEach(opportunity => {
                     if(opportunity.creator_id == userId){
                         myOpportunityList.push(opportunity);
@@ -60,8 +62,10 @@ router.get('/', auth, async (req, res, next) => {
         newOpportunity.title = req.body.createOpportunityTitle;
         newOpportunity.contents = req.body.createOpportunityContent;
         newOpportunity.creator_id = res.locals.result;
+        //console.log(newOpportunity.title);
       
         var newOpportunityBody = JSON.stringify(newOpportunity);
+        console.log(newOpportunityBody);
           const options = {
             method: 'POST',
             headers: {
@@ -77,12 +81,14 @@ router.get('/', auth, async (req, res, next) => {
             .then(response => response.json())
             .then(async data => {
               if (data.success === false){  
+                console.log(data);
                 res.render('error', { title: 'Error', message: 'Something Went Wrong'});
                 return "error";
               }
               else 
               {
                 console.log("my Opportunity posted?");
+                console.log(data);
                 res.redirect("/myOpportunities");
               }
             })
