@@ -11,7 +11,8 @@ require('dotenv').config();
 /* GET opportunities page. */
 
 router.get('/', async (req, res, next) => {
-
+  var afterpoint=req.query.after;
+  console.log(req.query.after);
   var opportunityInfo = [];
 
     const options = {
@@ -20,9 +21,12 @@ router.get('/', async (req, res, next) => {
       'Authorization': 'Bearer ' + process.env.BEARER_TOKEN,
       'content-type': 'application/json'
     }};
-
-    const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities'; //Setting uri based on user input
     
+    var varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities'; //Setting uri based on user input
+    if (afterpoint != null){
+        varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities?after='+afterpoint; //Setting uri based on user input
+
+    }
     fetch(varHttpRequest, options)
       .then(response => response.json())
       .then(async data => {
