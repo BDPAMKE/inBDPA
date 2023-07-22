@@ -136,7 +136,7 @@ router.post('/', async(req, res, next) => {
 
       console.log(userName);
       var token = jwt.sign({
-        id: userName, role: role
+        id: userID, role: role, name:userName
           }, process.env.BEARER_TOKEN, {
           expiresIn: 86400000
           });
