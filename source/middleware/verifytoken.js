@@ -16,6 +16,7 @@ const verifyToken = (req, res, next) => {
     req.user = decoded;
     res.locals.result=req.user.id;
     res.locals.role=req.user.role;
+    res.locals.name=req.user.name;
     return next();
   } 
   catch (err) {

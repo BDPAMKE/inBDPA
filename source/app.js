@@ -13,9 +13,12 @@ var logoutRouter = require('./routes/logout');
 var registerRouter = require('./routes/register');
 var resttestRouter = require('./routes/resttest');
 var adminRouter = require('./routes/admin');
+var connectcountRouter = require('./routes/connectcount');
+var profileedit = require('./routes/profileedit');
+var opportunitiesRouter = require('./routes/opportunities');
+var opportunityPageRouter = require('./routes/opportunityPage');
+var myOpportunitiesRouter = require('./routes/myOpportunities');
 var profileRouter = require('./routes/profile');
-
-
 var app = express();
 
 
@@ -37,6 +40,11 @@ app.use('/logout', logoutRouter);
 app.use('/register', registerRouter);
 app.use('/resttest', resttestRouter);
 app.use('/admin', adminRouter);
+app.use('/connectcount',connectcountRouter);
+app.use('/profileedit',profileedit);
+app.use('/opportunities', opportunitiesRouter);
+app.use('/opportunityPage', opportunityPageRouter);
+app.use('/myOpportunities', myOpportunitiesRouter)
 app.use('/profile', profileRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+          crossorigin="anonymous">
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+          crossorigin="anonymous">
+        </script>
+        <title><%= title %></title>
+      </head>
+
+
+      <body>
+        <%- include("./partials/header.ejs") %>
+
+
+        <% if (opportunity !== null) { %> 
+          <% var created = new Date(opportunity.createdAt); %>
+          <% var updated = new Date(opportunity.updatedAt); %>
+          <% var time = ""; %>
+
+          <% var now = new Date(); %>
+          <% var diffTime = new Date(Math.abs(updated - now)); %>
+          
+          <% var days = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+            if( days < 1){
+                var ms = diffTime % 1000;
+                diffTime = (diffTime - ms) / 1000;
+                var secs = diffTime % 60;
+                diffTime = (diffTime - secs) / 60;
+                var mins = diffTime % 60;
+                var hrs = (diffTime - mins) / 60;
+
+                if((hrs == 0) && (mins == 0)){
+                  time = secs + " seconds";
+                }
+                else if(hrs == 0){
+                  time = mins + " minutes";
+                }
+                else{
+                  time = hrs + " hours";
+                }
+            }
+            else if (days = 1){
+              time = days + " day";
+            }
+            else{
+              time = days + " days";
+            } %>
+
+            <section>
+            <div class="container py-5">
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                  <div class="card" style="border-radius: 1rem">
+                    <div class="card-body p-5">
+                      <h2 class="fw-bold mb-2">
+                        <div class="text-center">
+                        <a
+                        href="/opportunities/<%= opportunity.opportunity_id%>"
+                        id="<% opportunity.opportunity_id %>"
+                        style="text-decoration: none; color: black"
+                        ><%= opportunity.title%></a
+                        >
+                      </div>
+                      </h2>
+
+                      <br>
+
+                      <div class="row">
+                        <div class="text-center">Views: <%= opportunity.views %></div>
+                      </div>
+                      <div class="row">
+                        <div class="text-center">Content: <%= opportunity.contents %></div>
+                      </div>
+                      <div class="row">
+                        <div class="text-center">Created At: <%= created.toLocaleString('en-US') %></div>
+                      </div>
+                      <div class="row">
+                        <div class="text-center">Updated At: <%= updated.toLocaleString('en-US') %></div>
+                      </div>
+                      <div class="row">
+                        <div class="text-center">Last Updated: <%= time %> ago %> 
+                        </div>
+                      </div>
+
+                      <br>
+
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </section>
+          <% }; %>
+    </body>
+</html>

@@ -4,6 +4,7 @@ const crypto = require('crypto');
 
 const auth = require("../middleware/verifytoken");
 const myGetRestCall = require("../middleware/GetRestAPI");
+const connection= require("../middleware/ConnectCache");
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -15,7 +16,9 @@ router.get('/', function(req, res, next) {
  //This function will take the two variables and pass them to the Get RestAPI call 
   myGetRestCall.getWithBearerToken(url, token)
 .then(data => {
-  data.users.forEach(element => element.gravatar=crypto.createHash('md5').update(element.email).digest("hex"));
+  data.users.forEach(element => {element.gravatar=crypto.createHash('md5').update(element.email).digest("hex");
+        }
+  );
   res.render('users', { title: 'Test page', resultarray:data.users});
   } 
 )

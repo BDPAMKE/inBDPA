@@ -4,7 +4,8 @@ var router = express.Router();
 var crypto =require('crypto').webcrypto;
 var jwt=require('jsonwebtoken');
 const auth = require("../middleware/verifytoken");
-
+const myPatchRestCall = require('../middleware/PatchRestAPI');
+const { globalAgent } = require('http');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('login', { title: 'Login', message: '' });
@@ -34,6 +35,8 @@ router.post('/', async(req, res, next) => {
         );
     };
 
+    
+  
     // A function that converts a string of hexadecimal digits into an array of
     // bytes (you should verify that the string is hex first!)
     const convertHexToBuffer = (hexString) => {
@@ -119,26 +122,36 @@ router.post('/', async(req, res, next) => {
   })
   .then(response => response.json())
   .then(async data => {
-    //console.log("Message & Data ", data);
+    // console.log("Message & Data ", data);
     if (data.success === false){  //Login Failed
+     
         res.render('login', {title:'Login Unsuccessful', message: 'Invalid username or password'});
     }
     else //Login Successful
     {
-      console.log(role);
-      console.log(userID);
-      console.log(userName);
+      // console.log(role);
+      // console.log(userID);
+      global.userID = userID
+      global.role = role
+
+      // console.log(userName);
       var token = jwt.sign({
-        id: userName, role: role
+        id: userID, role: role, name:userName
           }, process.env.BEARER_TOKEN, {
           expiresIn: 86400000
           });
           //console.log(token);
-          global.userToken=token; //Store into global  
+          global.userToken=token; //Store into global
+ 
+       
+
+ //############# End  increment Views Count #####################  
       if (role=='administrator'){
+        
       res.render('admin', {title:'Admin Login Successful', message: 'Welcome to the admin page', name:userName});
       }
       else{
+             
         res.render('index',{title:'Login successful'});
       }
 
@@ -193,7 +206,6 @@ router.post('/', async(req, res, next) => {
         res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
         return "error";
       })
-
 });
 
   module.exports = router;
