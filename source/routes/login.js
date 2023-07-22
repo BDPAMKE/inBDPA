@@ -5,6 +5,7 @@ var crypto =require('crypto').webcrypto;
 var jwt=require('jsonwebtoken');
 const auth = require("../middleware/verifytoken");
 const myPatchRestCall = require('../middleware/PatchRestAPI');
+const { globalAgent } = require('http');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('login', { title: 'Login', message: '' });
@@ -130,6 +131,9 @@ router.post('/', async(req, res, next) => {
     {
       console.log(role);
       console.log(userID);
+      global.userID = userID
+      global.role = role
+
       console.log(userName);
       var token = jwt.sign({
         id: userName, role: role
@@ -142,8 +146,8 @@ router.post('/', async(req, res, next) => {
       const data = '{"views":"increment"}'; 
       const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/'+ userID  
       var token = process.env.BEARER_TOKEN; 
-      myPatchRestCall.patchWithBearerToken(url, token, data)
-        .then(data => console.log("View Incremented", data))
+       myPatchRestCall.patchWithBearerToken(url, token, data)
+        .then(data => console.log("View Incremented"))
         .catch(error => console.error(error));
        
 
