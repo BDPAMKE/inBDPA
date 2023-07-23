@@ -46,6 +46,7 @@ router.get('/:opportunity_id', function(req, res, next) {
 
 router.get('/', async (req, res, next) => {
   var afterpoint=req.query.after;
+  var prevafter=req.query.prevafter;
   console.log(req.query.after);
   var opportunityInfo = [];
 
@@ -61,6 +62,9 @@ router.get('/', async (req, res, next) => {
         varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities?after='+afterpoint; //Setting uri based on user input
 
     }
+    else{
+      afterpoint=0; //set default afterpoint
+    }
     fetch(varHttpRequest, options)
       .then(response => response.json())
       .then(async data => {
@@ -71,7 +75,11 @@ router.get('/', async (req, res, next) => {
         else 
         {
           opportunityInfo = data.opportunities;
-          res.render('opportunities', { title: 'Opportunities', opportunities: opportunityInfo });
+          var opportunityList=[]
+          for (var i=0;i<10;i++){
+            opportunityList[i]=opportunityInfo[i];
+          }
+          res.render('opportunities', { title: 'Opportunities', opportunities: opportunityList, after: afterpoint, prevafter: prevafter });
         }
       })
       .catch(error => { //Error in the fetch

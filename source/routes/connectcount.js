@@ -6,8 +6,27 @@ const auth = require("../middleware/verifytoken");
 const myGetRestCall = require("../middleware/GetRestAPI");
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.render('connectcount', { title: 'Get Connection Count', userid: "" });
+
+router.get('/', function(req, res, next) {
+ //############# Start  increment Views Count #####################        
+ const data = '{"views":"increment"}'; 
+ const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/'+ global.userID 
+ var body=data;
+fetch(url, {
+method: 'PATCH',
+headers: {
+ 'Authorization': 'Bearer ' +process.env.BEARER_TOKEN,
+ 'Content-Type': 'application/json'
+},
+body: data
+})
+console.log ("user", global.userID)
+
+
+
+
+
+ res.render('connectcount',{title:'Get Connection Count', userid:global.userID});
 });
 
 
