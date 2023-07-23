@@ -2,7 +2,7 @@
 
 async function fetchDataFromAPI() {
     try {
-      const response = await fetch('/userdata'); // Fetch data from the server's API endpoint
+      const response = await fetch('/getinfo'); // Fetch data from the server's API endpoint
       if (!response.ok) {
         throw new Error('API request failed');
       }
