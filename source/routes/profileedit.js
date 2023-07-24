@@ -7,6 +7,26 @@ const myGetRestCall = require("../middleware/GetRestAPI");
 const connection= require("../middleware/ConnectCache");
 const { Console } = require('console');
 const myPatchRestCall = require('../middleware/PatchRestAPI');
+const { request } = require('http');
+async function patchRequest(url, token, data) { 
+    fetch(url, {
+   method: 'PATCH',
+   headers: {
+     Authorization: `Bearer ${token}`,
+     'Content-Type': 'application/json'
+   },
+   body: {"sections": {"education":[{"title": "Education U2","startedAt": 1689732948656,"endedAt": 1689732948656,"location": "Milwaukee","description": "maybe studied"}]}}
+   })
+   .then(response => response.json())
+   .then(data =>  {console.log("patch",data)
+                return data})
+   
+   .catch(error => console.error(error))
+};
+
+
+
+
 /* GET users profile. */
 router.get('/', function(req, res, next) {
  // this in you route 
@@ -35,30 +55,60 @@ router.post('/', function(req, res, next) {
      var startAt= Date.now()
      var endAt= Date.now()
     // const data = '{"sections": {"education": ["test","1690005402388","1690005402388","mke","test"]}'
-    const data=' {"sections": {"about": "test ed 2"}}'
-     console.log("body", data) 
+    //const data='{"sections": {"education":[{"title": "Education U3","startedAt": 1689732948656,"endedAt": 1689732948656,"location": "Milwaukee","description": "maybe studied"}]}}'
+    // console.log("body", data) 
  
      //########################################## 
  //This function will take the two variables and pass them to the Get RestAPI call 
- /*
- myPatchRestCall.patchWithBearerToken(url, token, data)
-        .then(data => {console.log("Profile edit",data)
-        res.render('profileedit', { title: 'Profile Page return', });
-    }
-        
-        )
-        .catch(error => console.error(error));
-       
-      
-      });
-      
-  */  
-    
-    
-    
-    
-    
-    
-    });
+  body = '{"sections": {"education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
+  //console.log('print body',body) 
+  fetch(url, {
+  method: 'PATCH',
+  headers: {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  },
+  //body: JSON.stringify({"sections": {"education":[{"title": "Education U2","startedAt": 1689732948656,"endedAt": 1689732948656,"location": "Milwaukee","description": "maybe studied"}]}})
+  body: body
+})
+  .then(response => response.json())
+  .then(data =>  {console.log("patch it ",data)
+  if(data.success ==true) {
+      // if patch is success we need to read the user info. 
+      //This function will take the two variables and pass them to the Get RestAPI call 
+    myGetRestCall.getWithBearerToken(url, token)
+    .then(data => { console.log("Reread user ", data)
+      varSections = JSON.stringify(data.user.sections)  
+      varSections = JSON.parse(varSections)
+      varabout = data.user.sections.about
+     
+
+     console.log('education',varSections.education[0].title)
+
+         ;
+        }
+  )
+    //res.render('profileedit', { title: 'Profile Page', about:varabout,education:varEducation})
+    res.render('profileedit', { title: 'Profile Page: Patch Successful ' , about:"about",education:"data.user.sections"});
+  
+  } else {
+    res.render('profileedit', { title: 'Profile Page: Patch failed' , about:"about",education:"data.user.sections"});
+  }
+
+
+
+
+
+
+
+})
+  .catch(error => console.error(error))
+
+
+}
+
+  
+ 
+);
     
 module.exports = router;

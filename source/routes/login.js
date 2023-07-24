@@ -143,14 +143,15 @@ router.post('/', async(req, res, next) => {
           //console.log(token);
           global.userToken=token; //Store into global
   //############# Start  increment Views Count #####################        
-      const data = '{"views":"increment"}'; 
+  /*
+  const data = '{"views":"increment"}'; 
       const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/'+ userID  
       var token = process.env.BEARER_TOKEN; 
        myPatchRestCall.patchWithBearerToken(url, token, data)
         .then(data => console.log("View Incremented"))
         .catch(error => console.error(error));
        
-
+*/
  //############# End  increment Views Count #####################  
       if (role=='administrator'){
         
