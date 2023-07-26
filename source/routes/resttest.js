@@ -36,29 +36,25 @@ if(req.body.method.toUpperCase() == "POST") {
       const token = process.env.BEARER_TOKEN;
       const data = req.body;
       myPostRestCall.postWithBearerToken(url, token, data)
-        .then(data => {console.log(data),
+      /*  .then(data => {console.log(data),
           varData = JSON.stringify(data),
           res.render('resttest', { title:"resttest POST ", results: varData  }   
         )
         .catch(error => console.error(error));
-       
- })
-}
+   */
+      console.log('function',myPostRestCall())
+ }
+//}
 
   if(req.body.method.toUpperCase() == "PATCH") { 
     const url = req.body.url
     const token = process.env.BEARER_TOKEN;
     const data = req.body; 
     myPatchRestCall.patchWithBearerToken(url, token, data)
-  .then(data => {console.log(data),
-    varData = JSON.stringify(data),
-    res.render('resttest', {title:"resttest Patch ", results: varData  });
-    
-  })
-  .catch(error => console.error(error));
+    console.log("patch F ", JSON.parse(myPatchRestCall.patchWithBearerToken()) ) 
        
   }
-  
+ 
  
     if(req.body.method.toUpperCase() == "DELETE") { 
       const url = req.body.url
