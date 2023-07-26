@@ -3,48 +3,94 @@
   <head>
     <%- include('./partials/head') -%> <!-- head partial -->
   </head>
+  <script>
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+</script>
   <body>
     
     <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
+  
+   
     
-<form name="profileedit" id="profileedit" action="/profileedit"  method="post"> 
-    <div class="form-floating">
-      <input type="text" class="form-control" id="title" name="title" placeholder="title"  required>
-      <label for="title">Title</label>
-      </div>
-      
-      <div class="form-floating">
-      <input type="text" class="form-control" id="location" name="location" placeholder="Location" required>
-      <label for="location">Location</label>
-      </div>
-      
-      <div class="form-floating">
-      <input type="text" class="form-control" id="description" name="description" placeholder="description"  
-       
-      <label for="descriptiond">Description</label>
-      </div>
-      
-           
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Patch</button>
-      </form>
-
     <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
     <h1 class="text-center">  <%= title %></h1>
     <p class="text-center"> Welcome to <%= title %></p>
+    <form <form class="form-horizontal"   action="/profileedit"  method="post"> 
     <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table table-hover" >
       <tr>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Type</th>
-        <th>gone</th>
-
-        <!-- <th>Blog Name</th> -->
+        <td>Section</td><td> Education </td> <td> <button  type="submit">Update Section</button></td>
+      <tr>
+        <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td>
       </tr>
-     
+      <tr>
+          <td></td>
+          <td>Record ID</td>
+          <td>Title</td>
+          <td>location</td> 
+          <td>Description</td>
+      </tr>
+      <tr>
+        <div class="form-floating">
+        <%for (var result in education){%>
+          <td></td>
+          <td><%=result  %></td>
+          <td><input type="textarea"  id="title" name=title value = "<%= education[result].title %>" >   </td>
+          <td><input type="textarea"   id="location" name=location value = "<%= education[result].location %>" > </td>
+          <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= education[result].description %>"   > </td>
+       </tr>
+          
+      <%}%> 
+      </div>  
     </table>
+  </form>
+
     </div>
-      
+    <hr/> 
+    <hr/> 
+    <form <form class="form-horizontal"   action="/profileedit"  method="post"> 
+      <div class="table-responsive">
+      <table class="table table-hover" >
+        <tr>
+          <td>Section</td><td> Education </td> <td> <button  type="submit">Update Section</button></td>
+        <tr>
+          <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Record ID</td>
+            <td>Title</td>
+            <td>location</td> 
+            <td>Description</td>
+        </tr>
+        <tr>
+          <div class="form-floating">
+          <%for (var result in education){%>
+            <td></td>
+            <td><%=result  %></td>
+            <td><input type="textarea"  id="title" name=title value = "<%= education[result].title %>" >   </td>
+            <td><input type="textarea"   id="location" name=location value = "<%= education[result].location %>" > </td>
+            <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= education[result].description %>"   > </td>
+         </tr>
+            
+        <%}%> 
+        </div>  
+      </table>
+    </form>
+
+
+
+
+
+
+
     <%- include('./partials/footer') -%> <!-- includes footer partial -->
   </body>
 </html>

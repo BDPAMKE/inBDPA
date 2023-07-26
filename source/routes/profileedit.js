@@ -37,10 +37,15 @@ router.get('/', function(req, res, next) {
  //This function will take the two variables and pass them to the Get RestAPI call 
   myGetRestCall.getWithBearerToken(url, token)
 .then(data => { console.log("user ", data)
-  //data.users.forEach(element => {element.gravatar=crypto.createHash('md5').update(element.email).digest("hex");
-      //var sections_about = data.user.sections.about
-      //var sections_eduction = data.user.sections.eductaion        
-       res.render('profileedit', { title: 'Profile Page', about:data.user.sections.about,education:data.user.sections.eductaion});
+  varSections = JSON.stringify(data.user.sections)  
+  varSections = JSON.parse(varSections)
+  varEducation = varSections.education 
+  varExperience = varSections.experience   
+  varVolunteering = varSections.volunteering     
+  varSkills = varSections.skills  
+  varAbout =  varSections.about 
+      
+      res.render('profileedit', { title: 'Profile Page', about:varAbout,education:varEducation});
       }
 )
 .catch(error => console.error(error));
@@ -54,14 +59,11 @@ router.post('/', function(req, res, next) {
      // const data = req.body
      var startAt= Date.now()
      var endAt= Date.now()
-    // const data = '{"sections": {"education": ["test","1690005402388","1690005402388","mke","test"]}'
-    //const data='{"sections": {"education":[{"title": "Education U3","startedAt": 1689732948656,"endedAt": 1689732948656,"location": "Milwaukee","description": "maybe studied"}]}}'
-    // console.log("body", data) 
- 
+    
      //########################################## 
  //This function will take the two variables and pass them to the Get RestAPI call 
-  body = '{"sections": {"education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
-  //console.log('print body',body) 
+  body = '{"sections": {"about": "' +req.body.about +'","education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
+  console.log('print body',JSON.stringify(req.body.title)) 
   fetch(url, {
   method: 'PATCH',
   headers: {
@@ -80,19 +82,22 @@ router.post('/', function(req, res, next) {
     .then(data => { console.log("Reread user ", data)
       varSections = JSON.stringify(data.user.sections)  
       varSections = JSON.parse(varSections)
-      varabout = data.user.sections.about
-     
+      varEducation = varSections.education 
+      varExperience = varSections.experience   
+      varVolunteering = varSections.volunteering     
+      varSkills = varSections.skills  
+      varAbout =  varSections.about 
 
-     console.log('education',varSections.education[0].title)
+     console.log('education',varAbout, " ",varEducation)
 
          ;
         }
   )
-    //res.render('profileedit', { title: 'Profile Page', about:varabout,education:varEducation})
-    res.render('profileedit', { title: 'Profile Page: Patch Successful ' , about:"about",education:"data.user.sections"});
+    //res.redirect(request.get('referer'), { title: 'Profile Page: Patch Successful ' ,about:varAbout,education:varEducation});
+    res.render('profileedit', { title: 'Profile Page: Patch Successful ' ,about:varAbout,education:varEducation});
   
   } else {
-    res.render('profileedit', { title: 'Profile Page: Patch failed' , about:"about",education:"data.user.sections"});
+    res.render('profileedit', { title: 'Profile Page: Patch failed' , about:varAbout,education:varEducation});
   }
 
 
