@@ -46,8 +46,11 @@ router.get('/:opportunity_id', function(req, res, next) {
 
 router.get('/', async (req, res, next) => {
   var afterpoint=req.query.after;
+  if (afterpoint===null){
+    afterpoint=0;
+  }
   var prevafter=req.query.prevafter;
-  console.log(req.query.after);
+  console.log("Afterpoint:"+afterpoint);
   var opportunityInfo = [];
 
     const options = {
