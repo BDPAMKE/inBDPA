@@ -33,7 +33,7 @@ router.get('/', async (req, res, next) => {
         else 
         {
           opportunityInfo = data.opportunities;
-          res.render('opportunities', { title: 'Opportunities', opportunities: opportunityInfo });
+          res.render('opportunities', { title: 'Opportunities', opportunities: opportunityInfo, after:0 });
         }
       })
       .catch(error => { //Error in the fetch

@@ -144,7 +144,7 @@ router.post('/', async(req, res, next) => {
           global.userToken=token; //Store into global
 
        
-*/
+
  //############# End  increment Views Count #####################  
       if (role=='administrator'){
         
