@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head') -%> <!-- head partial -->
+  </head>
+  <body>
+
+    
+    <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
+
+    <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
+    <h1 class="text-center">  <%= title %></h1>
+    <p class="text-center"> Welcome to <%= title %></p>
+    <%- include('./partials/footer') -%> <!-- includes footer partial -->
+
+    <table>
+<tr> <td> username</td> <%= about %><td></td></tr>
+<td><td> education section</Title></td> <%= education %> </td> 
+<td><td> skills section</Title></td> <%= skills %> </td> 
+<td><td> volunteering section</Title></td> <%= volunteering %> </td> 
+<td><td> experience section</Title></td> <%= experience %> </td> 
+
+
+
+
+
+
+
+
+    </table>
+
+
+
+  </body>
+</html>
