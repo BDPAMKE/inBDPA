@@ -22,14 +22,24 @@
     <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
     <h1 class="text-center">  <%= title %></h1>
     <p class="text-center"> Welcome to <%= title %></p>
-    <form <form class="form-horizontal"   action="/profileedit"  method="post"> 
-    <div class="table-responsive">
-    <table class="table table-hover" >
+    
+        <form <form class="form-horizontal"  name="about" action="/profileedit"  method="post"> 
+         
+          <tr>
+            <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td><td><button  type="submit">Update About</button></td>
+            <input type ="text" hidden id="process" name=process value = "about">
+
+          </form>
+          </div>  
+        
+    </tr>
       <tr>
-        <td>Section</td><td> Education </td> <td> <button  type="submit">Update Section</button></td>
-      <tr>
-        <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td>
-      </tr>
+        <form <form class="form-horizontal"  name="Education" action="/profileedit"  method="post"> 
+          <div class="table-responsive">
+          <table class="table table-hover" >
+            <tr>
+              <td>Section</td><td> Education </td> <td> <button  type="submit">Update Education</button></td>
+        
       <tr>
           <td></td>
           <td>Record ID</td>
@@ -38,6 +48,7 @@
           <td>Description</td>
       </tr>
       <tr>
+       
         <div class="form-floating">
         <%for (var result in education){%>
           <td></td>
@@ -45,7 +56,7 @@
           <td><input type="textarea"  id="title" name=title value = "<%= education[result].title %>" >   </td>
           <td><input type="textarea"   id="location" name=location value = "<%= education[result].location %>" > </td>
           <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= education[result].description %>"   > </td>
-          <input type ="text" hidden id="process" name=process value = "array">
+          <input type ="text" hidden id="process" name=process value = "education">
        </tr>
           
       <%}%> 
@@ -56,14 +67,11 @@
     </div>
     <hr/> 
     <hr/> 
-    <form <form class="form-horizontal"   action="/profileedit"  method="post"> 
+    <form <form class="form-horizontal"  name="Experience"  action="/profileedit"  method="post"> 
       <div class="table-responsive">
       <table class="table table-hover" >
         <tr>
-          <td>Section</td><td> experience </td> <td> <button  type="submit">Update Section</button></td>
-        <tr>
-          <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td>
-        </tr>
+          <td>Section</td><td> experience </td> <td> <button  type="submit">Update Experience</button></td>
         <tr>
             <td></td>
             <td>Record ID</td>
@@ -79,47 +87,18 @@
             <td><input type="textarea"  id="title" name=title value = "<%= experience[result].title %>" >   </td>
             <td><input type="textarea"   id="location" name=location value = "<%= experience[result].location %>" > </td>
             <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= experience[result].description %>"   > </td>
-            <input type ="text" hidden id="process" name=process value = "array">
+            <input type ="text" hidden id="process" name=process value = "experience">
          </tr>
             
         <%}%> 
         </div>  
       </table>
-      <form <form class="form-horizontal"   action="/profileedit"  method="post"> 
-        <div class="table-responsive">
-        <table class="table table-hover" >
-          <tr>
-            <td>Section</td><td> experience </td> <td> <button  type="submit">Update Section</button></td>
-          <tr>
-            <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td>
-          </tr>
-          <tr>
-              <td></td>
-              <td>Record ID</td>
-              <td>Title</td>
-              <td>location</td> 
-              <td>Description</td>
-          </tr>
-          <tr>
-            <div class="form-floating">
-            <%for (var result in skills){%>
-              <td></td>
-              <td><%=result  %></td>
-              <td><input type="textarea"   id="skills" name=skills value = "<%= skills[result]%>" > </td>
-              <input type ="text" hidden id="process" name=process value = "skills">
-          </tr>
-              
-          <%}%> 
-          </div>  
-        </table>
-        <form <form class="form-horizontal"   action="/profileedit"  method="post"> 
+      
+        <form <form class="form-horizontal" name="Volunteering"  action="/profileedit"  method="post"> 
           <div class="table-responsive">
           <table class="table table-hover" >
             <tr>
-              <td>Section</td><td> volunteering </td> <td> <button  type="submit">Update Section</button></td>
-            <tr>
-              <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td>
-            </tr>
+              <td>Section</td><td> volunteering </td> <td> <button  type="submit">Update Volunteering</button></td>
             <tr>
                 <td></td>
                 <td>Record ID</td>
@@ -135,12 +114,35 @@
                 <td><input type="textarea"  id="title" name=title value = "<%= volunteering[result].title %>" >   </td>
                 <td><input type="textarea"   id="location" name=location value = "<%= volunteering[result].location %>" > </td>
                 <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= volunteering[result].description %>"   > </td>
-                <input type ="text" hidden id="process" name=process value = "array">
+                <input type ="text" hidden id="process" name=process value = "volunteering">
              </tr>
                 
             <%}%> 
             </div>  
           </table>
+          <form <form class="form-horizontal" name="Skills"  action="/profileedit"  method="post"> 
+            <div class="table-responsive">
+            <table class="table table-hover" >
+              <tr>
+                <td>Section</td><td> skills </td> <td> <button  type="submit">Update Skills</button></td>
+               <tr>
+                  <td></td>
+                  <td>Record ID</td>
+                  <td>Skills</td>
+                  
+              </tr>
+              <tr>
+                <div class="form-floating">
+                <%for (var result in skills){%>
+                  <td></td>
+                  <td><%=result  %></td>
+                  <td><input type="textarea"   id="skills" name=skills value = "<%= skills[result]%>" > </td>
+                  <input type ="text" hidden id="process" name=process value = "skills">
+              </tr>
+                  
+              <%}%> 
+              </div>  
+            </table>
     </form>
 
 

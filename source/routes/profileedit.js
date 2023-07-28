@@ -62,19 +62,40 @@ router.post('/', function(req, res, next) {
     
      //########################################## 
  //This function will take the two variables and pass them to the Get RestAPI call 
-  
+  console.log('request',JSON.stringify(req.body) )
+ if(req.body.process == "about") {
+  body = '{"sections": {"about": "' +req.body.about +'"}}'
+  console.log('print Skills',JSON.stringify(req.body.about)) 
+
+} 
+
+
  if(req.body.process == "skills") {
-                body = '{"sections": {"about": "' +req.body.about +'","skills":["skill1", "skill2", "skills3"]}}'
-                console.log('print body',JSON.stringify(req.body.skills)) 
+                body = '{"sections": {"skills":["skill1", "skill2", "skills3"]}}'
+                console.log('print Skills',JSON.stringify(req.body.skills)) 
 
- } else {
+ } 
+ 
+ if(req.body.process == "education") {
 
-                body = '{"sections": {"about": "' +req.body.about +'","education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
-                console.log('print body',JSON.stringify(req.body.title)) 
+                body = '{"sections": {"education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
+                console.log('print education',JSON.stringify(req.body) )
  }
  
- body = '{"sections": {"about": "' +req.body.about +'","education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
-  console.log('print body',JSON.stringify(req.body.title)) 
+ if(req.body.process == "experience") {
+
+  body = '{"sections": {"experience":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
+  console.log('print experience',JSON.stringify(req.body)) 
+}
+ 
+if(req.body.process == "volunteering") {
+
+  body = '{"sections": {"volunteering":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
+  console.log('print volunteering',JSON.stringify(req.body)) 
+}
+
+ //body = '{"sections": {"about": "' +req.body.about +'","education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
+ console.log('print body',JSON.parse(body)) 
   fetch(url, {
   method: 'PATCH',
   headers: {
@@ -89,7 +110,7 @@ router.post('/', function(req, res, next) {
   if(data.success ==true) {
       // if patch is success we need to read the user info. 
       //This function will take the two variables and pass them to the Get RestAPI call 
-    myGetRestCall.getWithBearerToken(url, token)
+    /*myGetRestCall.getWithBearerToken(url, token)
     .then(data => { console.log("Reread user ", data)
       varSections = JSON.stringify(data.user.sections)  
       varSections = JSON.parse(varSections)
@@ -104,6 +125,7 @@ router.post('/', function(req, res, next) {
          ;
         }
   )
+  */
     //res.redirect(request.get('referer'), { title: 'Profile Page: Patch Successful ' ,about:varAbout,education:varEducation});
     res.render('profileedit', { title: 'Profile Page: Patch Successful ' ,about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
   
