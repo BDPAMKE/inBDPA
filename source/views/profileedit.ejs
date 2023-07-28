@@ -59,7 +59,7 @@
       <div class="table-responsive">
       <table class="table table-hover" >
         <tr>
-          <td>Section</td><td> Education </td> <td> <button  type="submit">Update Section</button></td>
+          <td>Section</td><td> experience </td> <td> <button  type="submit">Update Section</button></td>
         <tr>
           <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td>
         </tr>
@@ -72,17 +72,73 @@
         </tr>
         <tr>
           <div class="form-floating">
-          <%for (var result in education){%>
+          <%for (var result in experience){%>
             <td></td>
             <td><%=result  %></td>
-            <td><input type="textarea"  id="title" name=title value = "<%= education[result].title %>" >   </td>
-            <td><input type="textarea"   id="location" name=location value = "<%= education[result].location %>" > </td>
-            <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= education[result].description %>"   > </td>
+            <td><input type="textarea"  id="title" name=title value = "<%= experience[result].title %>" >   </td>
+            <td><input type="textarea"   id="location" name=location value = "<%= experience[result].location %>" > </td>
+            <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= experience[result].description %>"   > </td>
          </tr>
             
         <%}%> 
         </div>  
       </table>
+      <form <form class="form-horizontal"   action="/profileedit"  method="post"> 
+        <div class="table-responsive">
+        <table class="table table-hover" >
+          <tr>
+            <td>Section</td><td> experience </td> <td> <button  type="submit">Update Section</button></td>
+          <tr>
+            <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td>
+          </tr>
+          <tr>
+              <td></td>
+              <td>Record ID</td>
+              <td>Title</td>
+              <td>location</td> 
+              <td>Description</td>
+          </tr>
+          <tr>
+            <div class="form-floating">
+            <%for (var result in experience){%>
+              <td></td>
+              <td><%=result  %></td>
+              <td><input type="textarea"  id="title" name=title value = "<%= experience[result].title %>" >   </td>
+              <td><input type="textarea"   id="location" name=location value = "<%= experience[result].location %>" > </td>
+              <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= experience[result].description %>"   > </td>
+           </tr>
+              
+          <%}%> 
+          </div>  
+        </table>
+        <form <form class="form-horizontal"   action="/profileedit"  method="post"> 
+          <div class="table-responsive">
+          <table class="table table-hover" >
+            <tr>
+              <td>Section</td><td> volunteering </td> <td> <button  type="submit">Update Section</button></td>
+            <tr>
+              <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Record ID</td>
+                <td>Title</td>
+                <td>location</td> 
+                <td>Description</td>
+            </tr>
+            <tr>
+              <div class="form-floating">
+              <%for (var result in volunteering){%>
+                <td></td>
+                <td><%=result  %></td>
+                <td><input type="textarea"  id="title" name=title value = "<%= volunteering[result].title %>" >   </td>
+                <td><input type="textarea"   id="location" name=location value = "<%= volunteering[result].location %>" > </td>
+                <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= volunteering[result].description %>"   > </td>
+             </tr>
+                
+            <%}%> 
+            </div>  
+          </table>
     </form>
 
 

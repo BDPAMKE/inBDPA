@@ -45,7 +45,7 @@ router.get('/', function(req, res, next) {
   varSkills = varSections.skills  
   varAbout =  varSections.about 
       
-      res.render('profileedit', { title: 'Profile Page', about:varAbout,education:varEducation});
+      res.render('profileedit', { title: 'Profile Page', about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
       }
 )
 .catch(error => console.error(error));
@@ -94,10 +94,10 @@ router.post('/', function(req, res, next) {
         }
   )
     //res.redirect(request.get('referer'), { title: 'Profile Page: Patch Successful ' ,about:varAbout,education:varEducation});
-    res.render('profileedit', { title: 'Profile Page: Patch Successful ' ,about:varAbout,education:varEducation});
+    res.render('profileedit', { title: 'Profile Page: Patch Successful ' ,about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
   
   } else {
-    res.render('profileedit', { title: 'Profile Page: Patch failed' , about:varAbout,education:varEducation});
+    res.render('profileedit', { title: 'Profile Page: Patch failed' , about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
   }
 
 
