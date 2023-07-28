@@ -45,6 +45,7 @@
           <td><input type="textarea"  id="title" name=title value = "<%= education[result].title %>" >   </td>
           <td><input type="textarea"   id="location" name=location value = "<%= education[result].location %>" > </td>
           <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= education[result].description %>"   > </td>
+          <input type ="text" hidden id="process" name=process value = "array">
        </tr>
           
       <%}%> 
@@ -78,6 +79,7 @@
             <td><input type="textarea"  id="title" name=title value = "<%= experience[result].title %>" >   </td>
             <td><input type="textarea"   id="location" name=location value = "<%= experience[result].location %>" > </td>
             <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= experience[result].description %>"   > </td>
+            <input type ="text" hidden id="process" name=process value = "array">
          </tr>
             
         <%}%> 
@@ -100,13 +102,12 @@
           </tr>
           <tr>
             <div class="form-floating">
-            <%for (var result in experience){%>
+            <%for (var result in skills){%>
               <td></td>
               <td><%=result  %></td>
-              <td><input type="textarea"  id="title" name=title value = "<%= experience[result].title %>" >   </td>
-              <td><input type="textarea"   id="location" name=location value = "<%= experience[result].location %>" > </td>
-              <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= experience[result].description %>"   > </td>
-           </tr>
+              <td><input type="textarea"   id="skills" name=skills value = "<%= skills[result]%>" > </td>
+              <input type ="text" hidden id="process" name=process value = "skills">
+          </tr>
               
           <%}%> 
           </div>  
@@ -134,6 +135,7 @@
                 <td><input type="textarea"  id="title" name=title value = "<%= volunteering[result].title %>" >   </td>
                 <td><input type="textarea"   id="location" name=location value = "<%= volunteering[result].location %>" > </td>
                 <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= volunteering[result].description %>"   > </td>
+                <input type ="text" hidden id="process" name=process value = "array">
              </tr>
                 
             <%}%> 

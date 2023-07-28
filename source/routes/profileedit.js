@@ -62,7 +62,18 @@ router.post('/', function(req, res, next) {
     
      //########################################## 
  //This function will take the two variables and pass them to the Get RestAPI call 
-  body = '{"sections": {"about": "' +req.body.about +'","education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
+  
+ if(req.body.process == "skills") {
+                body = '{"sections": {"about": "' +req.body.about +'","skills":["skill1", "skill2", "skills3"]}}'
+                console.log('print body',JSON.stringify(req.body.skills)) 
+
+ } else {
+
+                body = '{"sections": {"about": "' +req.body.about +'","education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
+                console.log('print body',JSON.stringify(req.body.title)) 
+ }
+ 
+ body = '{"sections": {"about": "' +req.body.about +'","education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
   console.log('print body',JSON.stringify(req.body.title)) 
   fetch(url, {
   method: 'PATCH',
@@ -88,7 +99,7 @@ router.post('/', function(req, res, next) {
       varSkills = varSections.skills  
       varAbout =  varSections.about 
 
-     console.log('education',varAbout, " ",varEducation)
+     console.log('education',varAbout, " ",varSkills)
 
          ;
         }
