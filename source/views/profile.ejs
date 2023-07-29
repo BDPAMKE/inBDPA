@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link 
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
-      rel="stylesheet" 
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
-      crossorigin="anonymous">
-    <script 
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
-      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
-      crossorigin="anonymous">
-    </script>
-    <title><%= title %></title>
+    <%- include('./partials/head') -%> <!-- head partial -->
   </head>
+  <script>
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+</script>
   <body>
-    <%- include('./partials/head') %> <!-- head partial -->
-
+    
+    <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
+  
+   
+    
+    <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
     <h1 class="text-center">  <%= title %></h1>
     <p class="text-center"> Welcome to <%= title %></p>
-
-    <h3>Username: <%= user.username %></h3>
-    <h3>Type: <%= user.type %></h3>
-    <h3>About: <%= user.sections.about %></h3>
-    <h3>Views: <%= user.views %></h3>
-    <h3>Experience: <%= user.sections.experience %></h3>
-    <h3>Education: <%= user.sections.education %></h3>
-    <h3>Volunteering: <%= user.sections.volunteering %></h3>
-    <h3>Skills: <%= user.sections.skills %></h3>
+       <table>
+       <tr>
+            <td>About:</td> <td><%= about %> </td></td>
+          </tr>
+            
+         <tr>
+         <tr>
+              <td>Section:</td><td> Education </td> 
+        <tr>
+          <td></td>
+          <td>Record ID</td><td>    </td>
+          <td>Title</td><td>    </td>
+          <td>location</td> <td>    </td>
+          <td>Description</td>
+      </tr>
+      <tr>
+           
+        <%for (var result in education){%>
+          <td></td>
+          <td><%=result  %></td><td>    </td>
+          <td><%= education[result].title %>   </td> <td>    </td>
+          <td><%= education[result].location %></td> <td>    </td>
+          <td><%= education[result].description %>" </td>  
+      </tr>
+          
+      <%}%> 
+      </div>  
+    </table>
+  
 
     <%- include('./partials/footer') -%> <!-- includes footer partial -->
   </body>

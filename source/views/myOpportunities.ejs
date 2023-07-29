@@ -59,7 +59,7 @@
       </head>
 
       <body>
-        <%- include("./partials/head.ejs") %>
+        <%- include("./partials/header.ejs") %>
 
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addOpportunityModal">
@@ -75,7 +75,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form onsubmit="Submit()" method="POST">
+          <form action="/myOpportunities" method="POST">
             <!-- Opportunity Title input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="">Opportunity Title</label>

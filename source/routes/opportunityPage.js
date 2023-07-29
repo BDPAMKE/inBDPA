@@ -3,7 +3,8 @@ var router = express.Router();
 var MarkdownIt = require('markdown-it'),
 md = new MarkdownIt();
 
-const auth = require("inBDPA/source/middleware/verifytoken");
+const httpRequest = require('https');
+const auth = require("../middleware/verifytoken");
 
 var incrementOpportunityView = require('inBDPA/source/middleware/viewManager/viewsManager.js');
 var startSession = require('inBDPA/source/middleware/sessionManager/startSession.js');
@@ -12,7 +13,8 @@ require('dotenv').config();
 
 /* GET opportunity page. */
 
-router.get('/:opportunityId', async (req, res, next) => {
+  var opportunityInfo = [];
+
     const options = {
       method: 'GET',
       headers: {
@@ -121,6 +123,3 @@ router.get('/:opportunityId', async (req, res, next) => {
           })
 
 module.exports = router;
-
-
-
