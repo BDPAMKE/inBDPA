@@ -22,7 +22,7 @@ async function fillNavbarList() {
     const data = await fetchDataFromAPI();
 
     if (data) {
-        userCount.innerHTML = data.info.users
+        userCount.innerHTML = "User Count: " + data.info.users
         };
     }
 
