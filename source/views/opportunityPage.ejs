@@ -15,7 +15,7 @@
           crossorigin="anonymous">
         </script>
         
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
           window.addEventListener("beforeunload", async (event) => {
             var session_id = document.getElementById("holdValue").value;
             console.log("sessionId", session_id);
@@ -47,7 +47,7 @@
                 return "error";
               })
           });
-        </script>
+        </script> -->
         
         <title><%= title %></title>
       </head>
@@ -58,7 +58,7 @@
   <br>
   <br>
 
-  <input type="hidden" name="test1" id="holdValue" value="<%= session_id %>">
+  <input type="hidden" name="test1" id="holdValue">
 
 
   <!-- Button -->

@@ -30,7 +30,7 @@ async function startSession(view, view_id) {
               else{
                 var session_id = data.session_id;
                 console.log("Session Started!!!");
-                continueSession(session_id);
+                // continueSession(session_id);
                 return session_id;
               }
             })
