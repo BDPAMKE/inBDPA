@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var myScripts = require('../public/javascript/timeConverter.js');
-const auth = require("inBDPA/source/middleware/verifytoken");
+const auth = require("../middleware/verifytoken");
 
 require('dotenv').config();
 

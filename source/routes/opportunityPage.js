@@ -6,13 +6,14 @@ md = new MarkdownIt();
 const httpRequest = require('https');
 const auth = require("../middleware/verifytoken");
 
-var incrementOpportunityView = require('inBDPA/source/middleware/viewManager/viewsManager.js');
-var startSession = require('inBDPA/source/middleware/sessionManager/startSession.js');
+var incrementOpportunityView = require('../middleware/viewManager/viewsManager.js');
+var startSession = require('../middleware/sessionManager/startSession.js');
 
 require('dotenv').config();
 
 /* GET opportunity page. */
 
+router.get('/:opportunity_id', function(req, res, next) {
   var opportunityInfo = [];
 
     const options = {
