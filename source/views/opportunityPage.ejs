@@ -14,6 +14,41 @@
           integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
           crossorigin="anonymous">
         </script>
+        
+        <script type="text/javascript">
+          window.addEventListener("beforeunload", async (event) => {
+            var session_id = document.getElementById("holdValue").value;
+            console.log("sessionId", session_id);
+
+            const options = {
+              method: 'DELETE',
+              headers: {
+                'Authorization': 'Bearer ' + "cf2b6b81-937f-4bed-b168-dd3fd6122c63",
+                'Content-Type': 'application/json'
+              },
+            };
+        
+            const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/sessions/' + session_id; //Setting uri based on user input
+            
+            console.log("STOPPING THIS SESSION", varHttpRequest)
+            await fetch(varHttpRequest, options)
+              .then(response => response.json())
+              .then(async data => {
+                if (data.success === false){
+                  console.log("Error")  
+                  return "error";
+                }
+                else{
+                  console.log("Session Ended!!!") 
+                }
+              })
+              .catch(error => { //Error in the fetch
+                console.error(error);
+                return "error";
+              })
+          });
+        </script>
+        
         <title><%= title %></title>
       </head>
 <body>
@@ -23,9 +58,12 @@
   <br>
   <br>
 
+  <input type="hidden" name="test1" id="holdValue" value="<%= session_id %>">
+
+
   <!-- Button -->
 <a href="/opportunities">
-<button type="button" class="btn btn-primary">
+<button type="button" class="btn btn-primary" >
   Back
 </button>
 </a>
@@ -47,19 +85,33 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form onsubmit="Submit()" method="POST">
-          <!-- Content input -->
+        <form action="<%= opportunityPage.opportunity_id%>/editOpportunity" method="POST">
+          <div class="modal-body">
+            Would you like to edit the <%= opportunityPage.title %>?          
+          </div>
+          <!-- Opportunity Title input -->
           <div class="form-outline mb-4">
-            <label class="form-label" for="">Content</label>
+            <label class="form-label" for="">Opportunity Title</label>
             <input
               type="text"
-              name="editContent"
-              id="editContent"
+              name="editOpportunityTitle"
+              id="editOpportunityTitle"
               class="form-control"
               value=""
             />
           </div>
-  
+
+          <!-- Opportunity Content input -->
+          <div class="form-outline mb-4">
+           <label class="form-label" for="">Opportunity Content</label>
+           <input
+             type="text"
+             name="editOpportunityContent"
+             id="editOpportunityContent"
+             class="form-control"
+             value=""
+           />
+           </div>  
           <br>
 
           <div class="modal-footer">

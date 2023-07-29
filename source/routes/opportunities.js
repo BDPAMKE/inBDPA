@@ -1,10 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var MarkdownIt = require('markdown-it'),
-md = new MarkdownIt();
-
-const httpRequest = require('https');
-const auth = require("inBDPA/source/middleware/verifytoken");
+var myScripts = require('../public/javascript/timeConverter.js')
 
 require('dotenv').config();
 
@@ -12,6 +8,8 @@ require('dotenv').config();
 
 router.get('/', async (req, res, next) => {
 
+  var afterpoint = req.query.after;
+  var prevafter = req.query.prevafter;
   var opportunityInfo = [];
 
     const options = {
@@ -20,9 +18,16 @@ router.get('/', async (req, res, next) => {
       'Authorization': 'Bearer ' + process.env.BEARER_TOKEN,
       'content-type': 'application/json'
     }};
-
-    const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities'; //Setting uri based on user input
     
+    var varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities'; //Setting uri based on user input
+
+    if (afterpoint != null){
+        varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities?after=' + afterpoint; //Setting uri based on user input
+    }
+    else{
+      afterpoint=0; //set default afterpoint
+    }
+
     fetch(varHttpRequest, options)
       .then(response => response.json())
       .then(async data => {
@@ -33,7 +38,13 @@ router.get('/', async (req, res, next) => {
         else 
         {
           opportunityInfo = data.opportunities;
-          res.render('opportunities', { title: 'Opportunities', opportunities: opportunityInfo });
+          var opportunityList=[];
+
+          for (var i=0; i<10; i++){
+            opportunityList[i]=opportunityInfo[i];
+          }
+
+          res.render('opportunities', { title: 'Opportunities', opportunities: opportunityList, after: afterpoint, prevafter: prevafter, utils: myScripts });
         }
       })
       .catch(error => { //Error in the fetch

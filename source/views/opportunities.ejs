@@ -19,43 +19,14 @@
 
 
       <body>
+
         <%- include("./partials/head.ejs") %>
 
+        <% var lastOpportunity = 0; %>
 
-        <% if (opportunities !== null) { %> <%opportunities.forEach(function(opportunity){%>
-          <% var created = new Date(opportunity.createdAt); %>
-          <% var updated = new Date(opportunity.updatedAt); %>
-          <% var time = ""; %>
-
-          <% var now = new Date(); %>
-          <% var diffTime = new Date(Math.abs(updated - now)); %>
-          
-          <% var days = Math.floor(diffTime / (1000 * 60 * 60 * 24))
-            if( days < 1){
-                var ms = diffTime % 1000;
-                diffTime = (diffTime - ms) / 1000;
-                var secs = diffTime % 60;
-                diffTime = (diffTime - secs) / 60;
-                var mins = diffTime % 60;
-                var hrs = (diffTime - mins) / 60;
-
-                if((hrs == 0) && (mins == 0)){
-                  time = secs + " seconds";
-                }
-                else if(hrs == 0){
-                  time = mins + " minutes";
-                }
-                else{
-                  time = hrs + " hours";
-                }
-            }
-            else if (days = 1){
-              time = days + " day";
-            }
-            else{
-              time = days + " days";
-            } %>
-
+        <% if (opportunities !== null) { %> <%opportunities.forEach(function(opportunity){ %>
+          <% lastOpportunity = opportunity.opportunity_id; %>
+          <% const { time, created, updated } = utils.timeConverter(opportunity.createdAt, opportunity.updatedAt) %>
             <section>
             <div class="container py-5">
               <div class="row d-flex justify-content-center align-items-center">
@@ -85,8 +56,7 @@
                         <div class="text-center">Updated At: <%= updated.toLocaleString('en-US') %></div>
                       </div>
                       <div class="row">
-                        <div class="text-center">Last Updated: <%= time %> ago %> 
-                        </div>
+                        <div class="text-center">Last Updated: <%= time %> ago %> </div>
                       </div>
 
                       <br>
@@ -98,6 +68,8 @@
                 </div>
           </section>
           <% }) %>
+          
+          <a href="/opportunities?after=<%= lastOpportunity %>&prevafter=<%= after %>"> Next 10</a>
           <% }; %>
     </body>
 </html>
