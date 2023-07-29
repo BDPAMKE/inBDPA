@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var MarkdownIt = require('markdown-it'),
-md = new MarkdownIt();
+var myScripts = require('../public/javascript/timeConverter.js')
 
 const httpRequest = require('https');
 const auth = require("../middleware/verifytoken");
