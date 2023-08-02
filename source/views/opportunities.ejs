@@ -15,11 +15,13 @@
           crossorigin="anonymous">
         </script>
         <title><%= title %></title>
+
+        <%- include('./partials/head') -%> <!-- head partial -->
       </head>
 
 
       <body>
-        <%- include("./partials/head.ejs") %>
+        <%- include("./partials/header.ejs") %>
 
         <% var lastOpportunity = 0; %>
 

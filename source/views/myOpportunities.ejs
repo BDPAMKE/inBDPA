@@ -14,6 +14,9 @@
           integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
           crossorigin="anonymous">
         </script>
+
+        <%- include('./partials/head') -%> <!-- head partial -->
+        
         <script>
           function deleteOpportunity(opportunityId){
             alert("There was a submition")
@@ -41,7 +44,7 @@
                 })
                 .catch(error => { //Error in the fetch
                   console.error(error);
-                  res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+                  res.render('error', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
                   return "error";
                 })
         }
