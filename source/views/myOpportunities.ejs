@@ -15,7 +15,7 @@
           crossorigin="anonymous">
         </script>
 
-        <%- include('./partials/head') -%> <!-- head partial -->
+        <%- include("./partials/header.ejs") %>
         
         <script>
           function deleteOpportunity(opportunityId){
@@ -62,8 +62,6 @@
       </head>
 
       <body>
-        <%- include("./partials/header.ejs") %>
-
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addOpportunityModal">
     Add Opportunity

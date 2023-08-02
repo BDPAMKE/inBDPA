@@ -14,14 +14,14 @@
           integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
           crossorigin="anonymous">
         </script>
-        <title><%= title %></title>
 
-        <%- include('./partials/head') -%> <!-- head partial -->
+        <%- include("./partials/header.ejs") %>
+
+        <title><%= title %></title>
       </head>
 
 
       <body>
-        <%- include("./partials/header.ejs") %>
 
         <% var lastOpportunity = 0; %>
 
