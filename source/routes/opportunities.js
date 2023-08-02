@@ -93,6 +93,77 @@ router.get('/:opportunity_id', function(req, res, next) {
         return "error";
       })
     });
+
+    /* Delete opportunities. */
+  
+    router.post('/:opportunityId/deleteOpportunity', async (req, res, next) => {
+      
+      const options = {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'Bearer ' + process.env.BEARER_TOKEN,
+          'Content-Type': 'application/json'
+        }
+      };
+  
+      const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities/' + req.params.opportunityId; //Setting uri based on user input
+      
+      fetch(varHttpRequest, options)
+        .then(response => response.json())
+        .then(async data => {
+          if (data.success === false){  
+            res.render('error', { title: 'Error', message: 'Something Went Wrong'});
+            return "error";
+          }
+          else 
+          {
+            res.redirect("/myOpportunities");
+          }
+        })
+        .catch(error => { //Error in the fetch
+          console.error(error);
+          res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+          return "error";
+        })
+      })
+
+      /* Edit opportunities. */
+
+      router.post('/:opportunityId/editOpportunity', async (req, res, next) => {
+        const newOpportunity = {};
+        newOpportunity.title = req.body.editOpportunityTitle;
+        newOpportunity.contents = req.body.editOpportunityContent;
+      
+        var newOpportunityBody = JSON.stringify(newOpportunity);
+          const options = {
+            method: 'PATCH',
+            headers: {
+              'Authorization': 'Bearer ' + process.env.BEARER_TOKEN,
+              'Content-Type': 'application/json'
+            },
+            body: newOpportunityBody
+          };
+      
+          const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities/' + req.params.opportunityId; //Setting uri based on user input
+      
+          fetch(varHttpRequest, options)
+            .then(response => response.json())
+            .then(async data => {
+              if (data.success === false){  
+                res.render('error', { title: 'Error', message: 'Something Went Wrong'});
+                return "error";
+              }
+              else 
+              {
+                res.redirect("/myOpportunities");
+              }
+            })
+            .catch(error => { //Error in the fetch
+              console.error(error);
+              res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+              return "error";
+            })
+          })
   
 
 module.exports = router;
