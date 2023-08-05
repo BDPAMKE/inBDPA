@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head') -%> <!-- head partial -->
+  </head>
+  <script>
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+</script>
+  <body>
+    
+    <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
+    <a href="profilepic.ejs>"Link text</a>
+    <div class="container">
+        <form class="w-50 mx-auto my-3" action="/uploads" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <input class="form-control" type="file" name="upload" required>
+            </div>
+            <button class="btn btn-primary">Upload</button>
+        </form>
+
+        <div class="container">
+            <div class="row">
+                <div class="col my-3">
+                    <div class="card" style="width: 18rem;">
+                      <img src="/images/image1.jpg" class="card-img-top" alt="Image">
+                    </div>
+                </div>
+                <div class="col my-3">
+                    <div class="card" style="width: 18rem;">
+                      <img src="/images/image2.jpg" class="card-img-top" alt="Image">
+                    </div>
+                </div>
+                <div class="col my-3">
+                    <div class="card" style="width: 18rem;">
+                      <img src="/images/image3.jpg" class="card-img-top" alt="Image">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+   
+    
+   
+    <%- include('./partials/footer') -%> <!-- includes footer partial -->
+  </body>
+</html>
