@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var MarkdownIt = require('markdown-it'),
-md = new MarkdownIt();
 
+var myScripts = require('../public/javascript/timeConverter.js');
 const auth = require("../middleware/verifytoken");
 
 require('dotenv').config();
@@ -41,7 +40,7 @@ router.get('/', auth, async (req, res, next) => {
                         myOpportunityList.push(opportunity);
                     }
                   });
-                  res.render('myOpportunities', { title: 'Opportunities', opportunities: myOpportunityList });
+                  res.render('myOpportunities', { title: 'Opportunities', opportunities: myOpportunityList, utils: myScripts });
               }
             })
             .catch(error => { //Error in the fetch

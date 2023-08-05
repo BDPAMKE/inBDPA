@@ -3,33 +3,107 @@
   <head>
     <%- include('./partials/head') -%> <!-- head partial -->
   </head>
+  <script>
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+</script>
   <body>
-
     
     <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
-
+  
+   
+    
     <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
     <h1 class="text-center">  <%= title %></h1>
     <p class="text-center"> Welcome to <%= title %></p>
-    <%- include('./partials/footer') -%> <!-- includes footer partial -->
+       <table>
+       <tr>
+            <td>About:</td> <td><%= about %> </td></td>
+          </tr>
+            
+         <tr>
+          <td></td>
+          <td>Record ID</td><td>    </td>
+          <td>Title</td><td>    </td>
+          <td>location</td> <td>    </td>
+          <td>Description</td>
+      </tr>
+      <tr>
+        <td>Section:</td><td> Education </td> 
+  <tr>
 
-    <table>
-<tr> <td> username</td> <%= about %><td></td></tr>
-<td><td> education section</Title></td> <%= education %> </td> 
-<td><td> skills section</Title></td> <%= skills %> </td> 
-<td><td> volunteering section</Title></td> <%= volunteering %> </td> 
-<td><td> experience section</Title></td> <%= experience %> </td> 
+      <tr>
+           
+        <%for (var result in education){%>
+          <td></td>
+          <td><%=result  %></td><td>    </td>
+          <td><%= education[result].title %>   </td> <td>    </td>
+          <td><%= education[result].location %></td> <td>    </td>
+          <td><%= education[result].description %>" </td>  
+      </tr>
+          
+      <%}%> 
+      </div>  
+      <div>
+        <tr>
+          <td>Section:</td><td> experience </td> 
+    <tr>
+
+        <tr>
+
+        
+           
+          <%for (var result in experience){%>
+            <td></td>
+            <td><%=result  %></td><td>    </td>
+            <td><%= experience[result].title %>   </td> <td>    </td>
+            <td><%= experience[result].location %></td> <td>    </td>
+            <td><%= experience[result].description %>" </td>  
+        </tr>
+            
+        <%}%> 
+      </div>
+      <tr>
+        <td>Section:</td><td> volunteering </td> 
+  <tr>
 
 
+      <%for (var result in volunteering){%>
+        <td></td>
+        <td><%=result  %></td><td>    </td>
+        <td><%= volunteering[result].title %>   </td> <td>    </td>
+        <td><%= volunteering[result].location %></td> <td>    </td>
+        <td><%= volunteering[result].description %>" </td>  
+    </tr>
+        
+    <%}%> 
+  </div>
+  
 
+    </div>
+    <tr>
+      <td>Section:</td><td> skills </td> 
+<tr>
 
+      <tr>
+        <%for (var result in skills){%>
+          <td></td>
+          <td><%=result  %></td>
+          <td>  <%= skills[result]%> </td>
+      </tr>
 
-
-
+<%}%>
+      </div>
 
     </table>
+  
 
-
-
+    <%- include('./partials/footer') -%> <!-- includes footer partial -->
   </body>
 </html>

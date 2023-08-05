@@ -4,5 +4,25 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #40c7fd;
+}
+/* custom-navbar.css */
+
+/* Add a box-like border around list items */
+.navbar .nav-item {
+  border: 1px solid #4491bd;
+  padding: 1px 10px;
+  color: rgba(37, 32, 32, 0.671); /* Set the text color to red (change it to any color you prefer) */
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  white-space: nowrap;
+  text-align: center;
+}
+/* custom-styles.css */
+
+/* Apply custom styles to anchor tags with the class "custom-link" */
+.navbar .nav-item .custom-link {
+  color: rgba(37, 32, 32, 0.671); /* Set the text color to red (change it to any color you prefer) */
+  text-decoration: none; /* Remove the underline */
 }

@@ -4,33 +4,53 @@ const crypto = require('crypto');
 
 const auth = require("../middleware/verifytoken");
 const myGetRestCall = require("../middleware/GetRestAPI");
+const connection= require("../middleware/ConnectCache");
+const { Console } = require('console');
+const myPatchRestCall = require('../middleware/PatchRestAPI');
+const { request } = require('http');
+async function patchRequest(url, token, data) { 
+    fetch(url, {
+   method: 'PATCH',
+   headers: {
+     Authorization: `Bearer ${token}`,
+     'Content-Type': 'application/json'
+   },
+   body: {"sections": {"education":[{"title": "Education U2","startedAt": 1689732948656,"endedAt": 1689732948656,"location": "Milwaukee","description": "maybe studied"}]}}
+   })
+   .then(response => response.json())
+   .then(data =>  {console.log("patch",data)
+                return data})
+   
+   .catch(error => console.error(error))
+};
 
-/* GET users listing. */
+
+
+
+/* GET users profile. */
 router.get('/', function(req, res, next) {
  // this in you route 
- const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/mkelen2' //- where the URL is whatever Get RestAPI Request  you are calling
+ const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + global.userID //- where the URL is whatever Get RestAPI Request  you are calling
  const token = process.env.BEARER_TOKEN;
-console.log ("before call",token)
+  console.log ("global user Id",global.userID)
   //########################################## 
  //This function will take the two variables and pass them to the Get RestAPI call 
   myGetRestCall.getWithBearerToken(url, token)
-.then(data => {
-  //data.users.forEach(element => element.gravatar=crypto.createHash('md5').update(element.email).digest("hex"));
-  var results = data
-  console.log('data ',data.user.sections)
-  var about=data.user.sections.about
-  var education=JSON.stringify (data.user.sections.education)
-  var skills=JSON.stringify (data.user.sections.skills)
-  var volunteering=JSON.stringify (data.user.sections.volunteering)
-  var experience=JSON.stringify (data.user.sections.experience)
-
-
-
-  console.log('education',education)
-  res.render('profile', { title: 'User Profile', about:about,education:education,experience:experience,volunteering:volunteering,skills:skills});
-  } 
+.then(data => { console.log("user ", data)
+  varSections = JSON.stringify(data.user.sections)  
+  varSections = JSON.parse(varSections)
+  varEducation = varSections.education 
+  varExperience = varSections.experience   
+  varVolunteering = varSections.volunteering     
+  varSkills = varSections.skills  
+  varAbout =  varSections.about 
+      
+      res.render('profile', { title: 'Profile Page', about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
+      }
 )
 .catch(error => console.error(error));
-});
-
+    }
+ 
+);
+    
 module.exports = router;
