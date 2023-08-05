@@ -28,15 +28,16 @@
           </tr>
             
          <tr>
-         <tr>
-              <td>Section:</td><td> Education </td> 
-        <tr>
           <td></td>
           <td>Record ID</td><td>    </td>
           <td>Title</td><td>    </td>
           <td>location</td> <td>    </td>
           <td>Description</td>
       </tr>
+      <tr>
+        <td>Section:</td><td> Education </td> 
+  <tr>
+
       <tr>
            
         <%for (var result in education){%>
@@ -49,6 +50,57 @@
           
       <%}%> 
       </div>  
+      <div>
+        <tr>
+          <td>Section:</td><td> experience </td> 
+    <tr>
+
+        <tr>
+
+        
+           
+          <%for (var result in experience){%>
+            <td></td>
+            <td><%=result  %></td><td>    </td>
+            <td><%= experience[result].title %>   </td> <td>    </td>
+            <td><%= experience[result].location %></td> <td>    </td>
+            <td><%= experience[result].description %>" </td>  
+        </tr>
+            
+        <%}%> 
+      </div>
+      <tr>
+        <td>Section:</td><td> volunteering </td> 
+  <tr>
+
+
+      <%for (var result in volunteering){%>
+        <td></td>
+        <td><%=result  %></td><td>    </td>
+        <td><%= volunteering[result].title %>   </td> <td>    </td>
+        <td><%= volunteering[result].location %></td> <td>    </td>
+        <td><%= volunteering[result].description %>" </td>  
+    </tr>
+        
+    <%}%> 
+  </div>
+  
+
+    </div>
+    <tr>
+      <td>Section:</td><td> skills </td> 
+<tr>
+
+      <tr>
+        <%for (var result in skills){%>
+          <td></td>
+          <td><%=result  %></td>
+          <td>  <%= skills[result]%> </td>
+      </tr>
+
+<%}%>
+      </div>
+
     </table>
   
 

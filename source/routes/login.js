@@ -35,8 +35,6 @@ router.post('/', async(req, res, next) => {
         );
     };
 
-    
-  
     // A function that converts a string of hexadecimal digits into an array of
     // bytes (you should verify that the string is hex first!)
     const convertHexToBuffer = (hexString) => {
