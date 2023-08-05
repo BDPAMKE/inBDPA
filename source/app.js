@@ -20,6 +20,7 @@ var opportunitiesRouter = require('./routes/opportunities');
 var myOpportunitiesRouter = require('./routes/myOpportunities');
 var profileRouter = require('./routes/profile');
 var forgotPassRouter = require('./routes/forgotPass');
+var impersonateRouter = require('./routes/impersonate');
 var profilepicRouter = require('./routes/profilepic');
 
 
@@ -51,9 +52,11 @@ app.use('/opportunities', opportunitiesRouter);
 app.use('/myOpportunities', myOpportunitiesRouter)
 app.use('/profile', profileRouter);
 app.use('/forgotPass', forgotPassRouter);
+app.use('/impersonate', impersonateRouter);
 app.use('/profilepic', profilepicRouter);
 app.use(fileUpload())
 //app.use(express.static('public')
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.status(404).render('error', {title:'404 page not found'});
