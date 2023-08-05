@@ -15,15 +15,15 @@
         <!-- We create an unordered list of navigation links/items.  The first one is a home link -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link-active" aria-current="page" href="/"> Home </a>
+            <a class="nav-link-active custom-link" aria-current="page" href="/" > Home </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             User Count: 
-          </li>
+          </li> -->
           <li class="nav-item" id="user-count">
           </li>
           <!-- We will need to add a submenu for customer information and entry -->
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown ">
             <!-- Set up "title" for dropdown menu section -->
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Users Info
@@ -37,8 +37,6 @@
               <li><a class="dropdown-item" href="/profile"> Profile </a></li> <!-- Third dropdown item-->
               <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
               <li><a class="dropdown-item" href="/profileedit"> Profile Edit </a></li> <!-- Fourth dropdown item-->
-              <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-              <li><a class="dropdown-item" href="#"> BLAH </a></li> <!-- Last dropdown item-->
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -48,30 +46,25 @@
             </a>
             <!-- Set up options for dropdown section--> <!-- href links are temporary placeholders here-->
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/create"> create </a></li> <!-- First dropdown item-->
+              <li><a class="dropdown-item" href="/opportunities"> Opportunities </a></li> <!-- First dropdown item-->
               <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-              <li><a class="dropdown-item" href="/manage"> manage </a></li> <!-- Second dropdown item-->
-              <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-              <li><a class="dropdown-item" href="/opportunities"> Opportunities </a></li> <!-- Third dropdown item-->
-              <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-              <li><a class="dropdown-item" href="/myOpportunities"> My Opportunities </a></li> <!-- Third dropdown item-->
-              <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-              <li><a class="dropdown-item" href="/opportunityPage"> Opportunity Page </a></li> <!-- Third dropdown item-->
-              
+              <li><a class="dropdown-item" href="/myOpportunities"> My Opportunities </a></li> <!-- Second dropdown item-->
             </ul>
           </li>
+
           <!-- We may need to add a submenu for product information and entry -->
           <!-- We will need to add an About Us submenu-->
           <!-- Link for registration -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link-active" aria-current="page" href="/resttest"> RestAPI Tester </a>
-          </li>
+          </li> -->
+
           <li class="nav-item">
-            <a class="nav-link-active" aria-current="page" href="/register"> Register </a>
+            <a class="nav-link-active custom-link" aria-current="page" href="/register"> Register </a>
           </li>
           <!-- Link for login (Placeholder for now)-->
           <li class="nav-item">
-            <a class="nav-link-active" aria-current="page" href="/login"> Login </a>
+            <a class="nav-link-active custom-link" aria-current="page" href="/login"> Login </a>
           </li>
         </ul>
       </div> <!-- closes the collapse/navbar-collapse navbar content -->

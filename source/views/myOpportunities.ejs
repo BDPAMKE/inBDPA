@@ -14,6 +14,9 @@
           integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
           crossorigin="anonymous">
         </script>
+
+        <%- include("./partials/header.ejs") %>
+        
         <script>
           function deleteOpportunity(opportunityId){
             alert("There was a submition")
@@ -41,7 +44,7 @@
                 })
                 .catch(error => { //Error in the fetch
                   console.error(error);
-                  res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+                  res.render('error', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
                   return "error";
                 })
         }
@@ -59,8 +62,6 @@
       </head>
 
       <body>
-        <%- include("./partials/header.ejs") %>
-
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addOpportunityModal">
     Add Opportunity
@@ -115,6 +116,7 @@
   </div>
 
         <% if (opportunities !== null) { %> <%opportunities.forEach(function(opportunity){%>
+          <% const { time, created, updated } = utils.timeConverter(opportunity.createdAt, opportunity.updatedAt) %>
             <section>
             <div class="container py-5">
               <div class="row d-flex justify-content-center align-items-center">
@@ -138,12 +140,15 @@
                         <div class="text-center">Views: <%= opportunity.views %></div>
                       </div>
                       <div class="row">
-                        <div class="text-center">Created At: <%= opportunity.createdAt %></div>
+                        <div class="text-center">Created At: <%= created.toLocaleString('en-US') %></div>
                       </div>
                       <div class="row">
-                        <div class="text-center">Updated At: <%= opportunity.updatedAt %></div>
+                        <div class="text-center">Updated At: <%= updated.toLocaleString('en-US') %></div>
                       </div>
-                    </div>
+                      <div class="row">
+                        <div class="text-center">Last Updated: <%= time %> ago %> </div>
+                      </div>
+                      </div>
                       </div>
                     </div>
                   </div>
