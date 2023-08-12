@@ -6,8 +6,12 @@ const { env } = require('process');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('register', { title: 'Register' });
+
+router.get('/',auth, function (req, res, next) {
+  const role=res.locals.role;
+  const id=res.locals.id;
+  const name=res.locals.name;
+  res.render('register', { title: 'Register',role:role,id:id,name:name });
 });
 
   router.post('/', async(req, res, next) => {
