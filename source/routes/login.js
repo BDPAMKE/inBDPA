@@ -8,7 +8,8 @@ const myPatchRestCall = require('../middleware/PatchRestAPI');
 const { globalAgent } = require('http');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('login', { title: 'Login', message: '' });
+    const role=res.locals.role;
+    res.render('login', { title: 'Login', message: '', role: role });
   });
 
 router.post('/', async(req, res, next) => {
