@@ -7,7 +7,7 @@ require('dotenv').config();
 const fileUpload = require('express-fileupload')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var userdataRouter = require('./routes/userdata');
+var systemDataRouter = require('./routes/systemData');
 var getinfoRouter = require('./routes/getinfo');
 var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/userdata', userdataRouter);
+app.use('/systemData', systemDataRouter);
 app.use('/getinfo', getinfoRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);

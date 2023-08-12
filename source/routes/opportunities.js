@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var myScripts = require('../public/javascript/timeConverter.js')
+const auth = require("../middleware/verifytoken");
+var myScripts = require('../public/javascript/timeConverter.js');
 
 var MarkdownIt = require('markdown-it'),
 md = new MarkdownIt();
 
 require('dotenv').config();
 
-router.get('/', async (req, res, next) => {
+router.get('/', auth, async (req, res, next) => {
   var afterpoint=req.query.after;
   var prevafter=req.query.prevafter;
   var opportunityInfo = [];
@@ -61,7 +62,11 @@ router.get('/', async (req, res, next) => {
 
 /* GET opportunities page. */
 
-router.get('/:opportunity_id', function(req, res, next) {
+router.get('/:opportunity_id', auth, function(req, res, next) {
+  const role=res.locals.role;
+  const username=res.locals.result;
+  var canEdit = false;
+  console.log("username", username)
   var opportunity_id=req.params.opportunity_id;
   const options = {
     method: 'GET',
@@ -84,7 +89,11 @@ router.get('/:opportunity_id', function(req, res, next) {
         {
           opportunityInfo = data.opportunity;
           var contentInfo = md.render(opportunityInfo.contents);
-          res.render('opportunityContent', { title: opportunityInfo.title, opportunity: opportunityInfo, content: contentInfo });
+          if(username === opportunityInfo.creator_id){
+            canEdit = true;
+          }
+          console.log("canEdit", canEdit)
+          res.render('opportunityContent', { title: opportunityInfo.title, opportunity: opportunityInfo, content: contentInfo, role:role, canEdit:canEdit });
         }
       })
       .catch(error => { //Error in the fetch

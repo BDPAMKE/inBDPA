@@ -53,7 +53,7 @@
         
         <title><%= title %></title>
       </head>
-<body>
+<body style="background-color: hsl(0, 0%, 96%)">
 
   <br>
   <br>
@@ -71,7 +71,8 @@
 <br>
 <br>
 
-<!-- Button trigger modal -->
+<% if (canEdit === true) { %>
+  <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editOpportunityModal">
   Edit Opportunity
 </button>
@@ -150,6 +151,8 @@
     </div>
   </div>
 </div>
+
+<% } %>
 
   <h3>Title: <%= opportunity.title %></h3>
   <br>

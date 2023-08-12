@@ -16,47 +16,64 @@
     >
   </script>
 
-
   <%- include("./partials/header.ejs") %>
-
   </head>
-  <body>
-    <div class="container py-5 h-100">
-    <h1 class=""><%= title %></h1>
-    <p class="">Welcome to <%= title %></p>
 
-      <br>
+  <body style="background-color: hsl(0, 0%, 96%)">
     
-      <form onsubmit="Submit()" method="POST">
-        <!-- Email input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="forgotEmail">Email address</label>
-          <input
-            type="email"
-            name="forgotEmail"
-            id="forgotEmail"
-            class="form-control"
-            value=""
-          />
-        </div>
+    <section>
+      <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="container">
+          <div class="row gx-lg-5 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+              <h1 class="my-5 display-3 fw-bold ls-tight">
+                Password <span class="text-primary">Reset</span>
+              </h1>
+              <p style="color: hsl(217, 10%, 50.8%)">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Eveniet, itaque accusantium odio, soluta, corrupti aliquam
+                quibusdam tempora at cupiditate quis eum maiores libero
+                veritatis? Dicta facilis sint aliquid ipsum atque?
+              </p>
+            </div>
+    
+            <div class="col-lg-6 mb-5 mb-lg-0">
+              <div class="card">
+                <div class="card-body py-5 px-md-5">
+                  <form action="/forgotPass" name="forgotPass" id="forgotPass" method="POST" style="border: none; outline: none;">
+                    
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="uname">Email address</label>
+                      <input type="text" id="uname" name="uname" class="form-control" />
+                    </div>
 
-        <!-- Submit button -->
-        <div class="col d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary btn-block mb-4">
-            Reset Password
-          </button>
+                    <!-- Submit button -->
+                    <div class="align-items-center">
+                      <button type="submit" class="btn btn-primary btn-block">
+                        Reset Password
+                      </button>
+                    </div>
+    
+                    <!-- Register buttons -->
+                    <div class="text-center">
+                      <p>Already have an account? <a href="/login">Login</a></p>
+                      <p>Don't have an account? <a href="/register">Register</a>?</p>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <br>
+    <br>
 
-        <!-- Change to Register -->
-        <div class="text-center">
-          <p>Already have an account? <a href="/login">Login</a></p>
-        </div>
-        <div class="text-center">
-          <p>Not a member? <a href="/register">Register</a></p>
-        </div>
-      </form>
-    </div>
+<footer>
+<%- include('./partials/footer') -%>
+</footer>
+
   </body>
 </html>
