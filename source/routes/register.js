@@ -6,12 +6,16 @@ const { env } = require('process');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('register', { title: 'Register' });
+router.get('/', auth, function(req, res, next) {
+  const role=res.locals.role;
+  const name=res.locals.result;
+  res.render('register', { title: 'Register' , role: role, name: name});
 });
 
-  router.post('/', async(req, res, next) => {
+router.post('/', auth, async(req, res, next) => {
     console.log(JSON.stringify(req.body));
+    const role=res.locals.role;
+    const name=res.locals.result;
   
     
     // The API expects a 64 byte key (128 hex digits long):
@@ -131,12 +135,12 @@ router.get('/', function(req, res, next) {
     .then(response => response.json())
     .then(data => {
       //console.log("Message & Data ", data);
-      res.render('register', { title: 'User Add Successful', message: data.message, data: data.data });
+      res.render('register', { title: 'User Add Successful', message: data.message, data: data.data, name: name, role: role });
     })
     .catch(error => {
       console.error(error);
       console.log(newUserBody);
-      res.render('register', { title: 'User Add Error', message: error.message, data: error.data });
+      res.render('register', { title: 'User Add Error', message: error.message, data: error.data, name: name, role: role });
       return "error";
     })
    

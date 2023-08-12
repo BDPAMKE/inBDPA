@@ -28,10 +28,12 @@ async function patchRequest(url, token, data) {
 
 
 /* GET users profile. */
-router.get('/', function(req, res, next) {
+router.get('/', auth, function(req, res, next) {
  // this in you route 
  const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + global.userID //- where the URL is whatever Get RestAPI Request  you are calling
  const token = process.env.BEARER_TOKEN;
+ const role=res.locals.role;
+  const name=res.locals.result; 
   console.log ("global user Id",global.userID)
   //########################################## 
  //This function will take the two variables and pass them to the Get RestAPI call 
@@ -45,7 +47,7 @@ router.get('/', function(req, res, next) {
   varSkills = varSections.skills  
   varAbout =  varSections.about 
       
-      res.render('profile', { title: 'Profile Page', about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
+      res.render('profile', { title: 'Profile Page', about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering, role: role, name: name});
       }
 )
 .catch(error => console.error(error));

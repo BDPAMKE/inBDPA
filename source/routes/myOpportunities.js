@@ -11,6 +11,7 @@ require('dotenv').config();
 router.get('/', auth, async (req, res, next) => {
     const role=res.locals.role;
     const userId = res.locals.result;
+    const name=res.locals.result;
 
     if (role!=="public"){
         var myOpportunityList = [];
@@ -27,7 +28,7 @@ router.get('/', auth, async (req, res, next) => {
             .then(response => response.json())
             .then(async data => {
               if (data.success === false){  
-                res.render('error', { title: 'Error', message: 'Something Went Wrong'});
+                res.render('error', { title: 'Error', message: 'Something Went Wrong', name: name, role: role});
                 return "error";
               }
               else 
@@ -40,12 +41,12 @@ router.get('/', auth, async (req, res, next) => {
                         myOpportunityList.push(opportunity);
                     }
                   });
-                  res.render('myOpportunities', { title: 'Opportunities', opportunities: myOpportunityList, utils: myScripts });
+                  res.render('myOpportunities', { title: 'Opportunities', opportunities: myOpportunityList, utils: myScripts, name: name, role: role });
               }
             })
             .catch(error => { //Error in the fetch
               console.error(error);
-              res.render('error', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+              res.render('error', { title: 'Invalid User', message: 'Invalid username or password', data: error.data, name: name, role: role });
               return "error";
             })
     }
@@ -57,6 +58,8 @@ router.get('/', auth, async (req, res, next) => {
     /* POST opportunities. */
 
     router.post('/', auth, async (req, res, next) => {
+      const role=res.locals.role;
+      const name=res.locals.result;
         const newOpportunity = {};
         newOpportunity.title = req.body.createOpportunityTitle;
         newOpportunity.contents = req.body.createOpportunityContent;
@@ -81,7 +84,7 @@ router.get('/', auth, async (req, res, next) => {
             .then(async data => {
               if (data.success === false){  
                 console.log(data);
-                res.render('error', { title: 'Error', message: 'Something Went Wrong'});
+                res.render('error', { title: 'Error', message: 'Something Went Wrong', name: name, role: role});
                 return "error";
               }
               else 
@@ -93,7 +96,7 @@ router.get('/', auth, async (req, res, next) => {
             })
             .catch(error => { //Error in the fetch
               console.error(error);
-              res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+              res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data, name: name, role: role });
               return "error";
             })
           })

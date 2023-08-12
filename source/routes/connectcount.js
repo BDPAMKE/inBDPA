@@ -7,7 +7,7 @@ const myGetRestCall = require("../middleware/GetRestAPI");
 
 /* GET users listing. */
 
-router.get('/', function(req, res, next) {
+router.get('/', auth, function(req, res, next) {
  //############# Start  increment Views Count #####################        
  const data = '{"views":"increment"}'; 
  const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/'+ global.userID 
@@ -25,8 +25,9 @@ console.log ("user", global.userID)
 
 
 
-
- res.render('connectcount',{title:'Get Connection Count', userid:global.userID});
+const role=res.locals.role;
+const name=res.locals.result;
+ res.render('connectcount',{title:'Get Connection Count', userid:global.userID, role: role, name: name});
 });
 
 

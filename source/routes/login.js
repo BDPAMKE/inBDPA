@@ -7,9 +7,10 @@ const auth = require("../middleware/verifytoken");
 const myPatchRestCall = require('../middleware/PatchRestAPI');
 const { globalAgent } = require('http');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    const role=res.locals.role;
-    res.render('login', { title: 'Login', message: '', role: role });
+router.get('/', auth, function(req, res, next) {
+  const role=res.locals.role;
+  const name=res.locals.result;
+    res.render('login', { title: 'Login', message: '', role: role, name: name });
   });
 
 router.post('/', async(req, res, next) => {

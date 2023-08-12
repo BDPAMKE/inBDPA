@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var auth = require("../middleware/verifytoken");
 const crypto = require('crypto');
 
 const auth = require("../middleware/verifytoken");
@@ -28,10 +29,12 @@ async function patchRequest(url, token, data) {
 
 
 /* GET users profile. */
-router.get('/', function(req, res, next) {
+router.get('/', auth, function(req, res, next) {
  // this in you route 
  const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + global.userID //- where the URL is whatever Get RestAPI Request  you are calling
  const token = process.env.BEARER_TOKEN;
+  const role=res.locals.role;
+  const name=res.locals.result;
   console.log ("global user Id",global.userID)
   //########################################## 
  //This function will take the two variables and pass them to the Get RestAPI call 
@@ -45,16 +48,18 @@ router.get('/', function(req, res, next) {
   varSkills = varSections.skills  
   varAbout =  varSections.about 
       
-      res.render('profileedit', { title: 'Profile Page', about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
+      res.render('profileedit', { title: 'Profile Page', about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering, role: role, name: name});
       }
 )
 .catch(error => console.error(error));
     });
 
-router.post('/', function(req, res, next) {    
+router.post('/', auth, function(req, res, next) {    
       console.log("patch")
       const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + global.userID //- where the URL is whatever Get RestAPI Request  you are calling
       const token = process.env.BEARER_TOKEN;
+      const role=res.locals.role;
+      const name=res.locals.result;
       console.log ("global user Id",global.userID)
      // const data = req.body
      var startAt= Date.now()
@@ -127,10 +132,10 @@ if(req.body.process == "volunteering") {
   )
   */
     //res.redirect(request.get('referer'), { title: 'Profile Page: Patch Successful ' ,about:varAbout,education:varEducation});
-    res.render('profileedit', { title: 'Profile Page: Patch Successful ' ,about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
+    res.render('profileedit', { title: 'Profile Page: Patch Successful ' ,about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering, role: role, name: name});
   
   } else {
-    res.render('profileedit', { title: 'Profile Page: Patch failed' , about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
+    res.render('profileedit', { title: 'Profile Page: Patch failed' , about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering, role: role, name: name});
   }
 
 

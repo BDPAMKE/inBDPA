@@ -1,13 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var myScripts = require('../public/javascript/timeConverter.js')
+var auth = require("../middleware/verifytoken");
+
 
 var MarkdownIt = require('markdown-it'),
 md = new MarkdownIt();
 
 require('dotenv').config();
 
-router.get('/', async (req, res, next) => {
+router.get('/', auth, async (req, res, next) => {
+  const role=res.locals.role;
+  const name=res.locals.result;
   var afterpoint=req.query.after;
   var prevafter=req.query.prevafter;
   var opportunityInfo = [];
@@ -39,7 +43,7 @@ router.get('/', async (req, res, next) => {
         console.log("link", varHttpRequest)
         console.log("data", data)
         if (data.success === false){  
-          res.render('error', { title: 'Error', message: 'Something Went Wrong'});
+          res.render('error', { title: 'Error', message: 'Something Went Wrong', });
           return "error";
         }
         else 
@@ -49,12 +53,12 @@ router.get('/', async (req, res, next) => {
           for (var i=0; i<10; i++){
             opportunityList[i]=opportunityInfo[i];
           }
-          res.render('opportunities', { title: 'Opportunities', opportunities: opportunityList, after: afterpoint, prevafter: prevafter, utils: myScripts });
+          res.render('opportunities', { title: 'Opportunities', opportunities: opportunityList, after: afterpoint, prevafter: prevafter, utils: myScripts, name: name, role: role });
         }
       })
       .catch(error => { //Error in the fetch
         console.error(error);
-        res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+        res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data, name: name, role: role });
         return "error";
       })
     })
@@ -84,20 +88,19 @@ router.get('/:opportunity_id', function(req, res, next) {
         {
           opportunityInfo = data.opportunity;
           var contentInfo = md.render(opportunityInfo.contents);
-          res.render('opportunityContent', { title: opportunityInfo.title, opportunity: opportunityInfo, content: contentInfo });
+          res.render('opportunityContent', { title: opportunityInfo.title, opportunity: opportunityInfo, content: contentInfo, name: name, role: role });
         }
       })
       .catch(error => { //Error in the fetch
         console.error(error);
-        res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+        res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data, name: name, role: role });
         return "error";
       })
     });
 
     /* Delete opportunities. */
   
-    router.post('/:opportunityId/deleteOpportunity', async (req, res, next) => {
-      
+    router.post('/:opportunityId/deleteOpportunity', auth, async (req, res, next) => {
       const options = {
         method: 'DELETE',
         headers: {
@@ -105,14 +108,15 @@ router.get('/:opportunity_id', function(req, res, next) {
           'Content-Type': 'application/json'
         }
       };
-  
+  const name=res.locals.result;
+  const role=res.locals.role;
       const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities/' + req.params.opportunityId; //Setting uri based on user input
       
       fetch(varHttpRequest, options)
         .then(response => response.json())
         .then(async data => {
           if (data.success === false){  
-            res.render('error', { title: 'Error', message: 'Something Went Wrong'});
+            res.render('error', { title: 'Error', message: 'Something Went Wrong', name: name, role: role});
             return "error";
           }
           else 
@@ -122,15 +126,17 @@ router.get('/:opportunity_id', function(req, res, next) {
         })
         .catch(error => { //Error in the fetch
           console.error(error);
-          res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+          res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data, name: name, role: role });
           return "error";
         })
       })
 
       /* Edit opportunities. */
 
-      router.post('/:opportunityId/editOpportunity', async (req, res, next) => {
+      router.post('/:opportunityId/editOpportunity', auth, async (req, res, next) => {
         const newOpportunity = {};
+        const name=res.locals.result;
+        const role=res.locals.role;
         newOpportunity.title = req.body.editOpportunityTitle;
         newOpportunity.contents = req.body.editOpportunityContent;
       
@@ -150,7 +156,7 @@ router.get('/:opportunity_id', function(req, res, next) {
             .then(response => response.json())
             .then(async data => {
               if (data.success === false){  
-                res.render('error', { title: 'Error', message: 'Something Went Wrong'});
+                res.render('error', { title: 'Error', message: 'Something Went Wrong', name: name, role: role});
                 return "error";
               }
               else 
@@ -160,7 +166,7 @@ router.get('/:opportunity_id', function(req, res, next) {
             })
             .catch(error => { //Error in the fetch
               console.error(error);
-              res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+              res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data , name: name, role: role});
               return "error";
             })
           })
