@@ -33,11 +33,7 @@
     
     <br>
 
-    <img src="https://www.gravatar.com/avatar/
-    <%= varEmail.gravatar  %>
-    ?d=identicon">
 
-    <br>
 
     <% if (varFullName == null) { %>
       <h6>Full Name: N/A</h6> 
@@ -55,14 +51,14 @@
 
     <br>
 
-    <form action="/profile/<%= varUser_id %>/deleteUser" method="POST">
-      <button type="submit" >Delete</button>
     </form>
 
     <h6>About: <%= about %></h6> 
 
     <br>
     <br>
+
+
 
     <h6>Education:</h6> 
     <%for (var result in education){%>
