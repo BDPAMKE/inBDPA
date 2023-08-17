@@ -1,214 +1,108 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link 
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
-      rel="stylesheet" 
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
-      crossorigin="anonymous">
-    <script 
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
-      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
-      crossorigin="anonymous">
-    </script>
-    <title><%= title %></title>
+    <%- include('./partials/head') -%> <!-- head partial -->
   </head>
+  <script>
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+</script>
   <body>
-    <%- include("./partials/header.ejs") %> <!-- head partial -->
-
+    
+    <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
+  
+   
+    
+    <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
     <h1 class="text-center">  <%= title %></h1>
     <p class="text-center"> Welcome to <%= title %></p>
+       <table>
+       <tr>
+            <td>About:</td> <td><%= about %> </td></td>
+          </tr>
+            
+         <tr>
+          <td></td>
+          <td>Record ID</td><td>    </td>
+          <td>Title</td><td>    </td>
+          <td>location</td> <td>    </td>
+          <td>Description</td>
+      </tr>
+      <tr>
+        <td>Section:</td><td> Education </td> 
+  <tr>
 
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileEmailModal">
-  Edit Email
-</button>
+      <tr>
+           
+        <%for (var result in education){%>
+          <td></td>
+          <td><%=result  %></td><td>    </td>
+          <td><%= education[result].title %>   </td> <td>    </td>
+          <td><%= education[result].location %></td> <td>    </td>
+          <td><%= education[result].description %>" </td>  
+      </tr>
+          
+      <%}%> 
+      </div>  
+      <div>
+        <tr>
+          <td>Section:</td><td> experience </td> 
+    <tr>
 
-<!-- Modal -->
-<div class="modal fade" id="editProfileEmailModal" tabindex="-1" aria-labelledby="editProfileEmailModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editProfileEmailModalLabel">Edit Email</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <tr>
+
+        
+           
+          <%for (var result in experience){%>
+            <td></td>
+            <td><%=result  %></td><td>    </td>
+            <td><%= experience[result].title %>   </td> <td>    </td>
+            <td><%= experience[result].location %></td> <td>    </td>
+            <td><%= experience[result].description %>" </td>  
+        </tr>
+            
+        <%}%> 
       </div>
-      <div class="modal-body">
-        <form action="<%= user.user_id %>/editEmail" method="POST">
-          <div class="modal-body">
-            Would you like to edit your Email?          
-          </div>
-          <!-- Opportunity Title input -->
-          <div class="form-outline mb-4">
-            <label class="form-label" for="editProfileEmail">Email</label>
-            <input
-              type="text"
-              name="editProfileEmail"
-              id="editProfileEmail"
-              class="form-control"
-              value=""
-            />
-          </div>
+      <tr>
+        <td>Section:</td><td> volunteering </td> 
+  <tr>
 
-          <br>
 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-  
-        </form>
-      </div>
-    </div>
+      <%for (var result in volunteering){%>
+        <td></td>
+        <td><%=result  %></td><td>    </td>
+        <td><%= volunteering[result].title %>   </td> <td>    </td>
+        <td><%= volunteering[result].location %></td> <td>    </td>
+        <td><%= volunteering[result].description %>" </td>  
+    </tr>
+        
+    <%}%> 
   </div>
-</div>
+  
 
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileAboutModal">
-      Edit About
-    </button>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="editProfileAboutModal" tabindex="-1" aria-labelledby="editProfileAboutModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editProfileAboutModalLabel">Edit About</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="<%= user.user_id %>/editAbout" method="POST">
-              <div class="modal-body">
-                Would you like to edit your About?          
-              </div>
-              <!-- Opportunity Title input -->
-              <div class="form-outline mb-4">
-                <label class="form-label" for="editProfileAbout">About</label>
-                <input
-                  type="text"
-                  name="editProfileAbout"
-                  id="editProfileAbout"
-                  class="form-control"
-                  value=""
-                />
-              </div>
-    
-              <br>
-    
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-              </div>
-      
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
+    <tr>
+      <td>Section:</td><td> skills </td> 
+<tr>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileExperienceModal">
-      Edit Experience
-    </button>
+      <tr>
+        <%for (var result in skills){%>
+          <td></td>
+          <td><%=result  %></td>
+          <td>  <%= skills[result]%> </td>
+      </tr>
 
-    <!-- Modal -->
-    <div class="modal fade" id="editProfileExperienceModal" tabindex="-1" aria-labelledby="editProfileExperienceModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editProfileExperienceModalLabel">Edit Experience</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="<%= user.user_id %>/editExperience" method="POST">
-              <div class="modal-body">
-                Would you like to edit your Experience?          
-              </div>
-
-              <!-- Opportunity Title input -->
-              <div class="form-outline mb-4">
-                <label class="form-label" for="editProfileExperienceTitle">Title</label>
-                <input
-                  type="text"
-                  name="editProfileExperienceTitle"
-                  id="editProfileExperienceTitle"
-                  class="form-control"
-                  value=""
-                />
-              </div>
-
-              <!-- Opportunity Title input -->
-              <div class="form-outline mb-4">
-                <label class="form-label" for="editProfileExperienceStartedAt">Start Date</label>
-                <input
-                  type="date"
-                  name="editProfileExperienceStartedAt"
-                  id="editProfileExperienceStartedAt"
-                  class="form-control"
-                  value=""
-                />
-              </div>
-
-              <!-- Opportunity Title input -->
-              <div class="form-outline mb-4">
-                <label class="form-label" for="editProfileExperienceEndedAt">End Date</label>
-                <input
-                  type="date"
-                  name="editProfileExperienceEndedAt"
-                  id="editProfileExperienceEndedAt"
-                  class="form-control"
-                  value=""
-                />
-              </div>
-
-              <!-- Opportunity Title input -->
-              <div class="form-outline mb-4">
-                <label class="form-label" for="editProfileExperienceLocation">Location</label>
-                <input
-                  type="text"
-                  name="editProfileExperienceLocation"
-                  id="editProfileExperienceLocation"
-                  class="form-control"
-                  value=""
-                />
-              </div>
-
-              <!-- Opportunity Title input -->
-              <div class="form-outline mb-4">
-                <label class="form-label" for="editProfileExperienceDescription">Description</label>
-                <input
-                  type="text"
-                  name="editProfileExperienceDescription"
-                  id="editProfileExperienceDescription"
-                  class="form-control"
-                  value=""
-                />
-              </div>
-    
-              <br>
-    
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-              </div>
-      
-            </form>
-          </div>
-        </div>
+<%}%>
       </div>
-    </div>
 
-    <h3>Username: <%= user.username %></h3>
-    <h3>Type: <%= user.type %></h3>
-    <h3>About: <%= user.sections.about %></h3>
-    <h3>Views: <%= user.views %></h3>
-    <h3>Experience: <%= user.sections.experience %></h3>
-    <h3>Education: <%= user.sections.education %></h3>
-    <h3>Volunteering: <%= user.sections.volunteering %></h3>
-    <h3>Skills: <%= user.sections.skills %></h3>
+    </table>
+  
 
     <%- include('./partials/footer') -%> <!-- includes footer partial -->
   </body>

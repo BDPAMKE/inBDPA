@@ -19,6 +19,7 @@ var connectcountRouter = require('./routes/connectcount');
 var opportunitiesRouter = require('./routes/opportunities');
 var myOpportunitiesRouter = require('./routes/myOpportunities');
 var profileRouter = require('./routes/profile');
+var profileEditRouter = require('./routes/profileedit');
 var forgotPassRouter = require('./routes/forgotPass');
 var impersonateRouter = require('./routes/impersonate');
 var profilepicRouter = require('./routes/profilepic');
@@ -51,6 +52,7 @@ app.use('/connectcount',connectcountRouter);
 app.use('/opportunities', opportunitiesRouter);
 app.use('/myOpportunities', myOpportunitiesRouter)
 app.use('/profile', profileRouter);
+app.use('/profileEdit', profileEditRouter);
 app.use('/forgotPass', forgotPassRouter);
 app.use('/impersonate', impersonateRouter);
 app.use('/profilepic', profilepicRouter);
