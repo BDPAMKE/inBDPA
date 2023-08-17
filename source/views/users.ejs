@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <%- include('./partials/head') -%> <!-- head partial -->
-  </head>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+          crossorigin="anonymous">
+        <script 
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+          integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
+          crossorigin="anonymous">
+        </script>
+        
+        <%- include("./partials/header.ejs") %>
+        
+        <title><%= title %></title>
+      </head>
+      
   <body>
-    
-    <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
 
     <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
     <h1 class="text-center">  <%= title %></h1>
@@ -39,9 +54,8 @@
          <!-- This is the Delete Button for Change 10-->
         <% if (resultarray[result].type != "administrator"){%>
         <td>
-          <form>
-            <button type="submit">Delete</button>
-            <input type="hidden" id = "userid" value = "<%= resultarray[result].user_id %>" %>
+          <form action="/users/<%= resultarray[result].user_id %>/deleteUser" method="POST">
+            <button type="submit" >Delete</button>
           </form>
         </td>
         <%}%>

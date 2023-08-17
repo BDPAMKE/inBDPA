@@ -21,11 +21,11 @@ router.get('/', auth, function(req, res, next) {
   myGetRestCall.getWithBearerToken(url, token)
 .then(data => {
   data.users.forEach(element => {element.gravatar=crypto.createHash('md5').update(element.email).digest("hex")});
-  res.render('users', { title: 'Test page', resultarray:data.users, role:role, id:id, name:name});
+  res.render('users', { title: 'User List', resultarray:data.users, role:role, id:id, name:name});
   })
 });
 
-router.post('/', auth, async (req, res, next) => {
+router.post('/:userId/deleteUser', auth, async (req, res, next) => {
   const role=res.locals.role;
   const id=res.locals.id;
   const name=res.locals.name;
@@ -38,9 +38,7 @@ router.post('/', auth, async (req, res, next) => {
     }
   };
 
-  var userId = req.body.userid;
-
-  const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + userId; //Setting uri based on user input
+  const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + req.params.userId; //Setting uri based on user input
   
   console.log("varHttpRequest", varHttpRequest);
 

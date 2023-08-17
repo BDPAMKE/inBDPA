@@ -71,7 +71,7 @@ app.use(auth, function(req, res, next) {
   const role=res.locals.role;
   const id=res.locals.id;
   const name=res.locals.name;
-  res.status(404).redirect('error', {title:'404 page not found',role:role,id:id,name:name});
+  res.status(404).render('error', {title:'404 page not found',role:role,id:id,name:name});
 });
 
 

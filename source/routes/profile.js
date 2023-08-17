@@ -42,6 +42,7 @@ router.get('/:userName', function(req, res, next) {
   //This function will take the two variables and pass them to the Get RestAPI call 
    myGetRestCall.getWithBearerToken(url, token)
  .then(data => { console.log("user ", data)
+ varUser_id = data.user.user_id
  varUsername = data.user.username; 
   varEmail = data.user.email; 
   varFullName = data.user.fullName;
@@ -56,10 +57,47 @@ router.get('/:userName', function(req, res, next) {
    varAbout =  varSections.about 
        
   res.render('profile', { title: 'Profile Page', varUsername:varUsername, varEmail:varEmail, varFullName:varFullName, varType:varType, varViews:varViews, 
-    about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
+    about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering, varUser_id:varUser_id});
   })
  .catch(error => console.error(error));
   });
+
+  router.post('/:userId/deleteUser', auth, async (req, res, next) => {
+    const role=res.locals.role;
+    const id=res.locals.id;
+    const name=res.locals.name;
+  
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer ' + process.env.BEARER_TOKEN,
+        'Content-Type': 'application/json'
+      }
+    };
+  
+    const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + req.params.userId; //Setting uri based on user input
+    
+    console.log("varHttpRequest", varHttpRequest);
+  
+    fetch(varHttpRequest, options)
+      .then(response => response.json())
+      .then(async data => {
+        if (data.success === false){  
+          res.render('error', { title: 'Error', message: 'Something Went Wrong', role:role, id:id, name:name });
+          return "error";
+        }
+        else 
+        {
+          res.redirect("/login");
+        }
+      })
+      .catch(error => { //Error in the fetch
+        console.error(error);
+        res.render('login', { title: 'Login', message: 'Invalid username or password', data: error.data, role:role, id:id, name:name });
+        return "error";
+      })
+    })
+  
 
  
 module.exports = router;
