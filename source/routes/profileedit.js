@@ -30,7 +30,7 @@ async function patchRequest(url, token, data) {
 /* GET users profile. */
 router.get('/', function(req, res, next) {
  // this in you route 
- const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + global.userID //- where the URL is whatever Get RestAPI Request  you are calling
+ const url = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + global.userID //- where the URL is whatever Get RestAPI Request  you are calling
  const token = process.env.BEARER_TOKEN;
   console.log ("global user Id",global.userID)
   //########################################## 
@@ -53,7 +53,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {    
       console.log("patch")
-      const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + global.userID //- where the URL is whatever Get RestAPI Request  you are calling
+      const url = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + global.userID //- where the URL is whatever Get RestAPI Request  you are calling
       const token = process.env.BEARER_TOKEN;
       console.log ("global user Id",global.userID)
      // const data = req.body

@@ -21,7 +21,7 @@ router.get('/', auth, async (req, res, next) => {
             'content-type': 'application/json'
           }};
       
-          const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities'; //Setting uri based on user input
+          const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/opportunities'; //Setting uri based on user input
           
           fetch(varHttpRequest, options)
             .then(response => response.json())
@@ -77,7 +77,7 @@ router.get('/', auth, async (req, res, next) => {
             body: newOpportunityBody
           };
       
-          const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities'; //Setting uri based on user input
+          const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/opportunities'; //Setting uri based on user input
           
           fetch(varHttpRequest, options)
             .then(response => response.json())

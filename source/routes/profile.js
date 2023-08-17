@@ -8,6 +8,7 @@ const connection= require("../middleware/ConnectCache");
 const { Console } = require('console');
 const myPatchRestCall = require('../middleware/PatchRestAPI');
 const { request } = require('http');
+
 async function patchRequest(url, token, data) { 
     fetch(url, {
    method: 'PATCH',
@@ -24,17 +25,14 @@ async function patchRequest(url, token, data) {
    .catch(error => console.error(error))
 };
 
-
-
-
-
-
 /* GET users profile. */
-router.get('/', function(req, res, next) {
+router.get('/', auth, function(req, res, next) {
+  const role=res.locals.role;
+  const id=res.locals.id;
+  const name=res.locals.name;
   // this in you route 
-  const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + global.userID //- where the URL is whatever Get RestAPI Request  you are calling
+  const url = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + id //- where the URL is whatever Get RestAPI Request  you are calling
   const token = process.env.BEARER_TOKEN;
-   console.log ("global user Id",global.userID)
    //########################################## 
   //This function will take the two variables and pass them to the Get RestAPI call 
    myGetRestCall.getWithBearerToken(url, token)
@@ -47,7 +45,7 @@ router.get('/', function(req, res, next) {
    varSkills = varSections.skills  
    varAbout =  varSections.about 
        
-       res.render('profile', { title: 'Profile Page', about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
+       res.render('profile', { title: 'Profile Page', varInfo:varInfo, about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
        }
  )
  .catch(error => console.error(error));
@@ -58,7 +56,7 @@ router.get('/', function(req, res, next) {
  /* GET users profile. */
 router.get('/:userName', function(req, res, next) {
   // this in you route 
-  const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + req.params.userName //- where the URL is whatever Get RestAPI Request  you are calling
+  const url = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + req.params.userName //- where the URL is whatever Get RestAPI Request  you are calling
   const token = process.env.BEARER_TOKEN;
    console.log ("Username",req.params.userName)
    //########################################## 

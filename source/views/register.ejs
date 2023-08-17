@@ -71,7 +71,8 @@
                   <!-- Username input -->
                   <div class="form-outline mb-4">
                     <label class="form-label" for="username">Username</label>
-                    <input type="text" id="username" name="username" class="form-control" />
+                    <input type="text" id="username" name="username" class="form-control" aria-describedby="usernameHelp" />
+                    <small id="usernameHelp" class="form-text text-muted">Alphanumeric (a-z, A-Z, 0-9)  or "-", or "_".</small>
                   </div>
 
                   <!-- Email input -->
@@ -85,6 +86,8 @@
                     <label class="form-label" for="password">Password</label>
                     <input type="password" id="password" name="password" class="form-control" maxlength="25" requiredlength="5"
                     title="Password must be at least 11 characters 11. A strong password is above 17 characters." required />
+                    <meter max="4" id="password-strength-meter"></meter>
+                    <p id="password-strength-text"></p>
                   </div>
   
                   <!-- Captcha input -->
