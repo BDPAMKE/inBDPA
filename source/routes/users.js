@@ -38,8 +38,12 @@ router.post('/', auth, async (req, res, next) => {
     }
   };
 
-  const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + req.params.userId; //Setting uri based on user input
+  var userId = req.body.userid;
+
+  const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + userId; //Setting uri based on user input
   
+  console.log("varHttpRequest", varHttpRequest);
+
   fetch(varHttpRequest, options)
     .then(response => response.json())
     .then(async data => {
@@ -49,7 +53,7 @@ router.post('/', auth, async (req, res, next) => {
       }
       else 
       {
-        res.redirect("/users", {role:role, id:id, name:name});
+        res.redirect("/users");
       }
     })
     .catch(error => { //Error in the fetch
