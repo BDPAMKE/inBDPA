@@ -117,6 +117,7 @@ router.get('/', auth, function (req, res, next) {
     const newUser = {};
       newUser.username=body.username;
       newUser.email=body.email;
+      newUser.fullName=body.fullName;
       newUser.salt=saltString;
       newUser.key=keyString;
       newUser.type="inner";
@@ -135,6 +136,7 @@ router.get('/', auth, function (req, res, next) {
     .then(response => response.json())
     .then(data => {
       //console.log("Message & Data ", data);
+      console.log(newUserBody);
       res.render('register', { title: 'User Add Successful', message: data.message, data: data.data, role:role, id:id, name:name });
     })
     .catch(error => {

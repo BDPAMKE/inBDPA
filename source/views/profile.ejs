@@ -22,21 +22,53 @@
     <h1 class="text-center">  <%= title %></h1>
     <p class="text-center"> Welcome to <%= title %></p>
     
+    <br>
+    <br>
+
+    <h6>Username: <%= varUsername %></h6>
     
-    <!-- <img src="https://www.gravatar.com/avatar/
-    <%= varInfo.username.gravatar  %>
-    ?d=identicon"> -->
+    <br>
+    
+    <h6>Email: <%= varEmail %></h6> 
+    
+    <br>
+
+    <img src="https://www.gravatar.com/avatar/
+    <%= varEmail.gravatar  %>
+    ?d=identicon">
 
     <br>
+
+    <% if (varFullName == null) { %>
+      <h6>Full Name: N/A</h6> 
+    <% } else {%>
+      <h6>Full Name: <%= varFullName %></h6> 
+      <% } %>
+
+    <br>    
+    
+    <h6>Type: <%= varType %></h6> 
+
     <br>
+
+    <h6>Views: <%= varViews %></h6> 
+
+    <br>
+
+    <form action="/profile/<%= varUser_id %>/deleteUser" method="POST">
+      <button type="submit" >Delete</button>
+    </form>
 
     <h6>About: <%= about %></h6> 
+
+    <br>
+    <br>
 
     <h6>Education:</h6> 
     <%for (var result in education){%>
       <p><%= education[result].title %></p>
       <p><%= education[result].location %></p>
-      <p><%= education[result].description %>"</p>  
+      <p><%= education[result].description %></p>  
     <%}%> 
 
     <br>
@@ -47,7 +79,7 @@
     <%for (var result in experience){%>
       <p><%= experience[result].title %></p>
       <p><%= experience[result].location %></p>
-      <p><%= experience[result].description %>"</p>    
+      <p><%= experience[result].description %></p>    
     <%}%> 
       
     <br>
@@ -58,7 +90,7 @@
       <%for (var result in volunteering){%>
         <p><%= volunteering[result].title %></p>
         <p><%= volunteering[result].location %></p>
-        <p><%= volunteering[result].description %>"</p>   
+        <p><%= volunteering[result].description %></p>   
       <%}%>
       
       <br>

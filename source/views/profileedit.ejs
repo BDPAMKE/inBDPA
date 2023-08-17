@@ -53,9 +53,9 @@
         <%for (var result in education){%>
           <td></td>
           <td><%=result  %></td>
-          <td><input type="textarea"  id="title" name=title value = "<%= education[result].title %>" >   </td>
+          <td><input type="textarea"  id="title" name=title value = "<%= education[result].title %>" ></td>
           <td><input type="textarea"   id="location" name=location value = "<%= education[result].location %>" > </td>
-          <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= education[result].description %>"   > </td>
+          <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= education[result].description %>"> </td>
           <input type ="text" hidden id="process" name=process value = "education">
        </tr>
           
@@ -86,7 +86,7 @@
             <td><%=result  %></td>
             <td><input type="textarea"  id="title" name=title value = "<%= experience[result].title %>" >   </td>
             <td><input type="textarea"   id="location" name=location value = "<%= experience[result].location %>" > </td>
-            <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= experience[result].description %>"   > </td>
+            <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= experience[result].description %>"> </td>
             <input type ="text" hidden id="process" name=process value = "experience">
          </tr>
             
