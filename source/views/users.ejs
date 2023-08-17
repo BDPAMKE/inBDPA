@@ -35,6 +35,17 @@
         <td> <%= resultarray[result].email %> </td>
         <td> <%= resultarray[result].type %> </td>
         <td> <%= resultarray[result].user_id %> </td>
+
+         <!-- This is the Delete Button for Change 10-->
+        <% if (resultarray[result].type != "administrator"){%>
+        <td>
+          <form>
+            <button type="submit">Delete</button>
+            <input type="hidden" id = "userid" value = "<%= resultarray[result].user_id %>" %>
+          </form>
+        </td>
+        <%}%>
+
         </tr> 
         <%}%>
     </table>
