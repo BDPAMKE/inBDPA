@@ -55,9 +55,13 @@ router.get('/:userName', function(req, res, next) {
    varVolunteering = varSections.volunteering     
    varSkills = varSections.skills  
    varAbout =  varSections.about 
+   varEmail =  varSections.email
+   varFullName =  varSections.fullname 
+ 
+
        
   res.render('profile', { title: 'Profile Page', varUsername:varUsername, varEmail:varEmail, varFullName:varFullName, varType:varType, varViews:varViews, 
-    about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering, varUser_id:varUser_id});
+    about:varAbout,email:varEmail,fullname:varFullName,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering, varUser_id:varUser_id});
   })
  .catch(error => console.error(error));
   });

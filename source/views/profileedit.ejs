@@ -26,13 +26,32 @@
         <form class="form-horizontal"  name="about" action="/profileedit"  method="post"> 
          
           <tr>
-            <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td><td><button  type="submit">Update About</button></td>
+            <td>About</td> <td><input type="text" id="about" name=about placeholder = "type here" </td><td><button  type="submit">Update About</button></td>
             <input type ="text" hidden id="process" name=process value = "about">
 
           </form>
           </div>  
-        
-    </tr>
+        </tr>
+        <form class="form-horizontal"  name="email" action="/profileedit"  method="post"> 
+         
+          <tr>
+            <td>Email</td> <td><input type="text" id="email" name=email placeholder = "type here" </td><td><button  type="submit">Update Email</button></td>
+            <input type ="text" hidden id="process" name=process value = "email">
+
+          </form>
+          </div>  
+        </tr>
+  
+        <form class="form-horizontal"  name="fullname" action="/profileedit"  method="post"> 
+         
+          <tr>
+            <td>FullName</td> <td><input type="text" id="fullname" name=fullname placeholder = "type here" </td><td><button  type="submit">Update Full Name</button></td>
+            <input type ="text" hidden id="process" name=process value = "fullname">
+
+          </form>
+          </div>  
+        </tr>
+
       <tr>
         <form class="form-horizontal"  name="Education" action="/profileedit"  method="post"> 
           <div class="table-responsive">
