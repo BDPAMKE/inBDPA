@@ -10,9 +10,9 @@ require('dotenv').config();
 
 router.get('/', auth, async (req, res, next) => {
     const role=res.locals.role;
-    const userId = res.locals.result;
+    const userId = res.locals.id;
 
-    if (role!=="public"){
+    if ((role==="staff") || (role==="administrator")){
         var myOpportunityList = [];
           const options = {
           method: 'GET',
@@ -27,7 +27,7 @@ router.get('/', auth, async (req, res, next) => {
             .then(response => response.json())
             .then(async data => {
               if (data.success === false){  
-                res.render('error', { title: 'Error', message: 'Something Went Wrong'});
+                res.render('error', { title: 'Error', message: 'Something Went Wrong', role:role, id:userId});
                 return "error";
               }
               else 
@@ -40,23 +40,26 @@ router.get('/', auth, async (req, res, next) => {
                         myOpportunityList.push(opportunity);
                     }
                   });
-                  res.render('myOpportunities', { title: 'Opportunities', opportunities: myOpportunityList, utils: myScripts });
+                  res.render('myOpportunities', { title: 'Opportunities', opportunities: myOpportunityList, utils: myScripts, role:role, id:userId });
               }
             })
             .catch(error => { //Error in the fetch
               console.error(error);
-              res.render('error', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+              res.render('error', { title: 'Invalid User', message: 'Invalid username or password', data: error.data, role:role, id:userId });
               return "error";
             })
     }
     else{
-        res.redirect('/login');
+        res.redirect('/login', {role:role, id:userId});
     }
     })
 
     /* POST opportunities. */
 
     router.post('/', auth, async (req, res, next) => {
+        const role=res.locals.role;
+        const userId = res.locals.id;
+
         const newOpportunity = {};
         newOpportunity.title = req.body.createOpportunityTitle;
         newOpportunity.contents = req.body.createOpportunityContent;
@@ -81,19 +84,19 @@ router.get('/', auth, async (req, res, next) => {
             .then(async data => {
               if (data.success === false){  
                 console.log(data);
-                res.render('error', { title: 'Error', message: 'Something Went Wrong'});
+                res.render('error', { title: 'Error', message: 'Something Went Wrong', role:role, id:userId});
                 return "error";
               }
               else 
               {
                 console.log("my Opportunity posted?");
                 console.log(data);
-                res.redirect("/myOpportunities");
+                res.redirect("/myOpportunities", {role:role, id:userId});
               }
             })
             .catch(error => { //Error in the fetch
               console.error(error);
-              res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+              res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data, role:role, id:userId });
               return "error";
             })
           })

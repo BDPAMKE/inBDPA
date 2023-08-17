@@ -8,11 +8,11 @@ const myPatchRestCall = require('../middleware/PatchRestAPI');
 const { globalAgent } = require('http');
 /* GET home page. */
 
-  router.get('/',auth, function (req, res, next) {
+  router.get('/', auth, function (req, res, next) {
     const role=res.locals.role;
     const id=res.locals.id;
     const name=res.locals.name;
-    res.render('login', { title: 'Login', message:'',role:role,id:id,name:name });
+    res.render('login', { title: 'Login', message:'', role:role, id:id, name:name });
   });
 
 router.post('/', auth, async(req, res, next) => {
@@ -130,7 +130,7 @@ router.post('/', auth, async(req, res, next) => {
     // console.log("Message & Data ", data);
     if (data.success === false){  //Login Failed
      
-        res.render('login', {title:'Login Unsuccessful', message: 'Invalid username or password',role:role,id:id,name:name });
+        res.render('login', {title:'Login Unsuccessful', message: 'Invalid username or password', role:role, id:id, name:name });
     }
     else //Login Successful
     {
@@ -152,18 +152,18 @@ router.post('/', auth, async(req, res, next) => {
 
       if (role=='administrator'){
         
-      res.render('admin', {title:'Admin Login Successful', message: 'Welcome to the admin page', role:role,id:id,name:name });
+      res.render('admin', {title:'Admin Login Successful', message: 'Welcome to the admin page', role:role, id:id, name:name });
       }
       else{
              
-        res.render('index',{title:'Login successful',role:role,id:id,name:name });
+        res.render('index',{title:'Login successful',role:role, id:id, name:name });
       }
     }
     
   })
   .catch(error => { //Error in the fetch, not necessarily not finding a user
     console.error(error);
-    res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data ,role:role,id:id,name:name });
+    res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data, role:role, id:id, name:name });
     return "error";
   })
 
@@ -186,7 +186,7 @@ router.post('/', auth, async(req, res, next) => {
       .then(async data => {
         console.log("Message & Data ", data);
         if (data.success === false){  //Username is not even in the system
-            res.render('login', {title:'Login Unsuccessful', message: 'Invalid username or password',role:role,id:id,name:name });
+            res.render('login', {title:'Login Unsuccessful', message: 'Invalid username or password', role:role, id:id, name:name });
         }
         else //Username is at least in the system
         {

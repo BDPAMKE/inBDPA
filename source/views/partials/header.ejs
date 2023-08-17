@@ -20,8 +20,7 @@
 
           <% if (role != 'public') { %>
 
-            <li class="nav-item" id="user-count"></li>
-
+            <% if ((role==="staff") || (role==="administrator")){%>
             <li class="nav-item dropdown">
               <!-- Set up "title" for dropdown menu section -->
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,7 +32,19 @@
                 <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
                 <li><a class="dropdown-item" href="/myOpportunities"> My Opportunities </a></li> <!-- Second dropdown item-->
               </ul>
+            </li>
+            <% } %>
 
+            <% if ((role==="inner")){%>
+              <li class="nav-item">
+                <a class="nav-link-active custom-link" aria-current="page" href="/opportunities"> Opportunities </a>
+              </li>
+              <% } %>
+
+              <% if (role == 'administrator') { %>
+
+              <li class="nav-item" id="user-count"></li>
+              
               <li class="nav-item dropdown ">
                 <!-- Set up "title" for dropdown menu section -->
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,18 +56,19 @@
                   <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
                   <li><a class="dropdown-item" href="/users"> Users List </a></li> <!-- Second dropdown item-->
                   <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="/profile"> Profile </a></li> <!-- Third dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="/profileedit"> Profile Edit </a></li> <!-- Fourth dropdown item-->
                 </ul>
               </li>
+              <% } %> 
+
+
+            <li class="nav-item">
+              <a class="nav-link-active custom-link" aria-current="page" href="/profile"> Profile </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link-active custom-link" aria-current="page" href="/logout"> Logout </a>
             </li>
           <% } %> 
-         
 
           <!-- We may need to add a submenu for product information and entry -->
           <!-- We will need to add an About Us submenu-->
@@ -74,7 +86,7 @@
           <li class="nav-item">
             <a class="nav-link-active custom-link" aria-current="page" href="/login"> Login </a>
           </li>
-          <% } %> 
+          <% } %>
         </ul>
       </div> <!-- closes the collapse/navbar-collapse navbar content -->
     </div> <!-- closes our container-fluid section -->
