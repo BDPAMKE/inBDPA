@@ -49,8 +49,17 @@
             <% } %>
 
             <% if ((role==="inner")){%>
-              <li class="nav-item">
-                <a class="nav-link-active custom-link" aria-current="page" href="/articles"> Articles </a>
+              <li class="nav-item dropdown">
+                <!-- Set up "title" for dropdown menu section -->
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Feed
+                </a>
+                <!-- Set up options for dropdown section--> <!-- href links are temporary placeholders here-->
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/articles"> Feed </a></li> <!-- First dropdown item-->
+                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
+                  <li><a class="dropdown-item" href="/myArticles"> My Feed </a></li> <!-- Second dropdown item-->
+                </ul>
               </li>
               <li class="nav-item">
                 <a class="nav-link-active custom-link" aria-current="page" href="/opportunities"> Opportunities </a>
@@ -70,6 +79,7 @@
                   <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
                   <li><a class="dropdown-item" href="/users"> Users List </a></li> <!-- Second dropdown item-->
                   <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
+                  <li><a class="dropdown-item" href="/register"> Register New User </a></li> <!-- Second dropdown item-->
                 </ul>
               </li>
 

@@ -120,9 +120,9 @@ router.get('/', auth, function (req, res, next) {
       newUser.fullName=body.fullName;
       newUser.salt=saltString;
       newUser.key=keyString;
-      newUser.type="inner";
+      newUser.type=body.type;
       var newUserBody=JSON.stringify(newUser);
-      //console.log("generator call", newUserBody);
+      console.log("generator call", newUserBody);
         const fetch = require('node-fetch'); //We may need to npm install this...
       const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users';
     fetch(varHttpRequest, {
