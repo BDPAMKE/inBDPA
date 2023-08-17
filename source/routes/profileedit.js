@@ -8,6 +8,7 @@ const connection= require("../middleware/ConnectCache");
 const { Console } = require('console');
 const myPatchRestCall = require('../middleware/PatchRestAPI');
 const { request } = require('http');
+
 async function patchRequest(url, token, data) { 
     fetch(url, {
    method: 'PATCH',
@@ -44,8 +45,12 @@ router.get('/', function(req, res, next) {
   varVolunteering = varSections.volunteering     
   varSkills = varSections.skills  
   varAbout =  varSections.about 
+  varEmail =  varSections.email 
+  varFullName =  varSections.fullname 
+
+
       
-      res.render('profileedit', { title: 'Profile Page', about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
+      res.render('profileedit', { title: 'Profile Page', about:varAbout,email:varEmail,fullname:varFullName,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
       }
 )
 .catch(error => console.error(error));
@@ -70,6 +75,22 @@ router.post('/', function(req, res, next) {
 } 
 
 
+
+console.log('request',JSON.stringify(req.body) )
+if(req.body.process == "email") {
+ body = '{"sections": {"email": "' +req.body.email +'"}}'
+ console.log('print Skills',JSON.stringify(req.body.email)) 
+
+}
+
+console.log('request',JSON.stringify(req.body) )
+if(req.body.process == "fullname") {
+ body = '{"sections": {"fullname": "' +req.body.fullname +'"}}'
+ console.log('print Skills',JSON.stringify(req.body.fullname)) 
+
+} 
+
+
  if(req.body.process == "skills") {
                 body = '{"sections": {"skills":["skill1", "skill2", "skills3"]}}'
                 console.log('print Skills',JSON.stringify(req.body.skills)) 
@@ -78,9 +99,9 @@ router.post('/', function(req, res, next) {
  
  if(req.body.process == "education") {
 
-                body = '{"sections": {"education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
-                console.log('print education',JSON.stringify(req.body) )
- }
+  body = '{"sections": {"education":[{"title": " '+req.body.title+'","startedAt":'+ startAt+',"endedAt":'+ endAt+',"location":"' + req.body.location + '","description":"' + req.body.description+'"}]}}'
+  console.log('print education',JSON.stringify(req.body)) 
+}
  
  if(req.body.process == "experience") {
 
@@ -119,6 +140,13 @@ if(req.body.process == "volunteering") {
       varVolunteering = varSections.volunteering     
       varSkills = varSections.skills  
       varAbout =  varSections.about 
+      varEmail =  varSections.email
+      varAbout =  varSections.about 
+      varEmail =  varSections.email 
+
+
+ 
+
 
      console.log('education',varAbout, " ",varSkills)
 
