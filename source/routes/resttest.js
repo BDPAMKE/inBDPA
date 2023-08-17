@@ -7,6 +7,7 @@ const myGetRestCall = require("../middleware/GetRestAPI");
 const myPostRestCall = require('../middleware/PostRestAPI');
 const myPatchRestCall = require('../middleware/PatchRestAPI');
 const myDeleteRestCall = require("../middleware/DeleteRestAPI"); 
+
 /* GET resttest page */
 router.get('/', function(req, res, next) {
   res.render('resttest', { title:"resttest", results:""});
@@ -42,7 +43,7 @@ if(req.body.method.toUpperCase() == "POST") {
         )
         .catch(error => console.error(error));
    */
-      console.log('function',myPostRestCall())
+      console.log('function', myPostRestCall())
  }
 //}
 

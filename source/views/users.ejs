@@ -21,15 +21,20 @@
       </tr>
       <%for (var result in resultarray){%>
         <tr>
-        <td> <%= resultarray[result].username %> </td> 
+        <td>
+          <img src="https://www.gravatar.com/avatar/
+          <%= resultarray[result].gravatar  %>
+          ?d=identicon">
+        </td>
+        <td>
+          <a
+          href="/profile/<%= resultarray[result].user_id %>"
+          ><%= resultarray[result].username %> </a
+          >
+        </td> 
         <td> <%= resultarray[result].email %> </td>
         <td> <%= resultarray[result].type %> </td>
         <td> <%= resultarray[result].user_id %> </td>
-        <td>
-            <img src="https://www.gravatar.com/avatar/
-            <%= resultarray[result].gravatar  %>
-            ?d=identicon">
-        </td>
         </tr> 
         <%}%>
     </table>

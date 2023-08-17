@@ -5,23 +5,24 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
 const fileUpload = require('express-fileupload')
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var userdataRouter = require('./routes/userdata');
+var systemDataRouter = require('./routes/systemData');
 var getinfoRouter = require('./routes/getinfo');
 var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
-var registerRouter = require('./routes/register');
+var registerRouter = require('./routes/register')
 var resttestRouter = require('./routes/resttest');
 var adminRouter = require('./routes/admin');
 var connectcountRouter = require('./routes/connectcount');
-var profileedit = require('./routes/profileedit');
 var opportunitiesRouter = require('./routes/opportunities');
 var myOpportunitiesRouter = require('./routes/myOpportunities');
 var profileRouter = require('./routes/profile');
 var forgotPassRouter = require('./routes/forgotPass');
 var impersonateRouter = require('./routes/impersonate');
 var profilepicRouter = require('./routes/profilepic');
+var errorRouter = require('./routes/error');
 
 
 var app = express();
@@ -39,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/userdata', userdataRouter);
+app.use('/systemData', systemDataRouter);
 app.use('/getinfo', getinfoRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
@@ -47,19 +48,26 @@ app.use('/register', registerRouter);
 app.use('/resttest', resttestRouter);
 app.use('/admin', adminRouter);
 app.use('/connectcount',connectcountRouter);
-app.use('/profileedit',profileedit);
 app.use('/opportunities', opportunitiesRouter);
 app.use('/myOpportunities', myOpportunitiesRouter)
 app.use('/profile', profileRouter);
 app.use('/forgotPass', forgotPassRouter);
 app.use('/impersonate', impersonateRouter);
 app.use('/profilepic', profilepicRouter);
+app.use('/error', errorRouter);
+
 app.use(fileUpload())
-//app.use(express.static('public')
+app.use(express.static('public'))
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  res.status(404).render('error', {title:'404 page not found'});
+
+const auth = require("./middleware/verifytoken");
+
+app.use(auth, function(req, res, next) {
+  const role=res.locals.role;
+  const id=res.locals.id;
+  const name=res.locals.name;
+  res.status(404).redirect('error', {title:'404 page not found',role:role,id:id,name:name});
 });
 
 

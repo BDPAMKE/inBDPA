@@ -7,18 +7,24 @@ const auth = require("../middleware/verifytoken");
 const myPatchRestCall = require('../middleware/PatchRestAPI');
 const { globalAgent } = require('http');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('profilepic', { title: 'profilepic', message: '' });
+router.get('/', auth, function(req, res, next) {
+  const role=res.locals.role;
+  const id=res.locals.id;
+  const name=res.locals.name;
+  
+  res.render('profilepic', { title: 'profilepic', message: '', role:role, id:id, name:name});
   });
 
- router.post('/', function(req, res) {
-  console.log
+ router.post('/profilepic', auth, function(req, res) {
+    const role=res.locals.role;
+    const id=res.locals.id;
+    const name=res.locals.name;
     const file = req.files.upload
     const filePath = path.join(__dirname, 'public', 'images', `${file.name}`)
     console.log ("before write image")
     file.mv(filePath, err => {
     if (err) return res.status(500).send(err)
-    res.redirect('/')
+    res.redirect('/', {role:role, id:id, name:name})
     })
     console.log("after write image")
     })

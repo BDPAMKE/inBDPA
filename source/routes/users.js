@@ -7,8 +7,12 @@ const myGetRestCall = require("../middleware/GetRestAPI");
 const connection= require("../middleware/ConnectCache");
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
- // this in you route 
+router.get('/', auth, function(req, res, next) {
+  const role=res.locals.role;
+  const id=res.locals.id;
+  const name=res.locals.name;
+  
+  // this in you route 
  const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users' //- where the URL is whatever Get RestAPI Request  you are calling
  const token = process.env.BEARER_TOKEN;
 
@@ -19,7 +23,7 @@ router.get('/', function(req, res, next) {
   data.users.forEach(element => {element.gravatar=crypto.createHash('md5').update(element.email).digest("hex");
         }
   );
-  res.render('users', { title: 'Test page', resultarray:data.users});
+  res.render('users', { title: 'Test page', resultarray:data.users, role:role, id:id, name:name});
   } 
 )
 .catch(error => console.error(error));
