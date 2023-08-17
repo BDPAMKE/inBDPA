@@ -117,6 +117,7 @@ router.get('/', auth, function (req, res, next) {
     const newUser = {};
       newUser.username=body.username;
       newUser.email=body.email;
+      newUser.fullName=body.fullName;
       newUser.salt=saltString;
       newUser.key=keyString;
       newUser.type="inner";

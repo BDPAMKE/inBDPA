@@ -9,49 +9,32 @@ const { Console } = require('console');
 const myPatchRestCall = require('../middleware/PatchRestAPI');
 const { request } = require('http');
 
-async function patchRequest(url, token, data) { 
-    fetch(url, {
-   method: 'PATCH',
-   headers: {
-     Authorization: `Bearer ${token}`,
-     'Content-Type': 'application/json'
-   },
-   body: {"sections": {"education":[{"title": "Education U2","startedAt": 1689732948656,"endedAt": 1689732948656,"location": "Milwaukee","description": "maybe studied"}]}}
-   })
-   .then(response => response.json())
-   .then(data =>  {console.log("patch",data)
-                return data})
+// async function patchRequest(url, token, data) { 
+//     fetch(url, {
+//    method: 'PATCH',
+//    headers: {
+//      Authorization: `Bearer ${token}`,
+//      'Content-Type': 'application/json'
+//    },
+//    body: {"sections": {"education":[{"title": "Education U2","startedAt": 1689732948656,"endedAt": 1689732948656,"location": "Milwaukee","description": "maybe studied"}]}}
+//    })
+//    .then(response => response.json())
+//    .then(data =>  {console.log("patch",data)
+//                 return data})
    
-   .catch(error => console.error(error))
-};
+//    .catch(error => console.error(error))
+// };
 
 /* GET users profile. */
-router.get('/', auth, function(req, res, next) {
+router.get('/', auth, async (req, res, next) => {
   const role=res.locals.role;
   const id=res.locals.id;
   const name=res.locals.name;
-  // this in you route 
-  const url = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + id //- where the URL is whatever Get RestAPI Request  you are calling
-  const token = process.env.BEARER_TOKEN;
-   //########################################## 
-  //This function will take the two variables and pass them to the Get RestAPI call 
-   myGetRestCall.getWithBearerToken(url, token)
- .then(data => { console.log("user ", data)
-   varSections = JSON.stringify(data.user.sections)  
-   varSections = JSON.parse(varSections)
-   varEducation = varSections.education 
-   varExperience = varSections.experience   
-   varVolunteering = varSections.volunteering     
-   varSkills = varSections.skills  
-   varAbout =  varSections.about 
-       
-       res.render('profile', { title: 'Profile Page', varInfo:varInfo, about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
-       }
- )
- .catch(error => console.error(error));
-     }
-  
- );
+
+  const userId = res.locals.result;
+  res.redirect("/profile/" + userId)
+  })
+
 
  /* GET users profile. */
 router.get('/:userName', function(req, res, next) {
@@ -63,6 +46,7 @@ router.get('/:userName', function(req, res, next) {
   //This function will take the two variables and pass them to the Get RestAPI call 
    myGetRestCall.getWithBearerToken(url, token)
  .then(data => { console.log("user ", data)
+
    varSections = JSON.stringify(data.user.sections)  
    varSections = JSON.parse(varSections)
    varEducation = varSections.education 
@@ -76,7 +60,6 @@ router.get('/:userName', function(req, res, next) {
  )
  .catch(error => console.error(error));
      }
-  
  );
 
  

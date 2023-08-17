@@ -22,21 +22,19 @@
     <h1 class="text-center">  <%= title %></h1>
     <p class="text-center"> Welcome to <%= title %></p>
     
-    
-    <!-- <img src="https://www.gravatar.com/avatar/
-    <%= varInfo.username.gravatar  %>
-    ?d=identicon"> -->
-
     <br>
     <br>
 
     <h6>About: <%= about %></h6> 
 
+    <br>
+    <br>
+
     <h6>Education:</h6> 
     <%for (var result in education){%>
       <p><%= education[result].title %></p>
       <p><%= education[result].location %></p>
-      <p><%= education[result].description %>"</p>  
+      <p><%= education[result].description %></p>  
     <%}%> 
 
     <br>
@@ -47,7 +45,7 @@
     <%for (var result in experience){%>
       <p><%= experience[result].title %></p>
       <p><%= experience[result].location %></p>
-      <p><%= experience[result].description %>"</p>    
+      <p><%= experience[result].description %></p>    
     <%}%> 
       
     <br>
@@ -58,7 +56,7 @@
       <%for (var result in volunteering){%>
         <p><%= volunteering[result].title %></p>
         <p><%= volunteering[result].location %></p>
-        <p><%= volunteering[result].description %>"</p>   
+        <p><%= volunteering[result].description %></p>   
       <%}%>
       
       <br>

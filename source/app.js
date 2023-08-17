@@ -6,6 +6,7 @@ var logger = require('morgan');
 require('dotenv').config();
 const fileUpload = require('express-fileupload')
 
+var articlesRouter = require('./routes/articles');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var systemDataRouter = require('./routes/systemData');
@@ -40,6 +41,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/articles', articlesRouter);
 app.use('/users', usersRouter);
 app.use('/systemData', systemDataRouter);
 app.use('/getinfo', getinfoRouter);
