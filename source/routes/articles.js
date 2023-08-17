@@ -43,12 +43,12 @@ router.get('/', auth, async (req, res, next) => {
         }
         else 
         {
-          opportunityInfo = data.opportunities;
-          var opportunityList=[]
+          articleInfo = data.articles;
+          var articleList=[]
           for (var i=0; i<10; i++){
-            opportunityList[i]=opportunityInfo[i];
+            articleList[i]=articleInfo[i];
           }
-          res.render('opportunities', { title: 'Opportunities', opportunities: opportunityList, after: afterpoint, prevafter: prevafter, utils: myScripts, role:role, id:id, name:name });
+          res.render('articles', { title: 'Articles', articles: articleList, after: afterpoint, prevafter: prevafter, utils: myScripts, role:role, id:id, name:name });
         }
       })
       .catch(error => { //Error in the fetch
@@ -58,15 +58,15 @@ router.get('/', auth, async (req, res, next) => {
       })
     })
 
-/* GET opportunities page. */
+/* GET Articles page. */
 
-router.get('/:opportunity_id', auth, function(req, res, next) {
+router.get('/:article_id', auth, function(req, res, next) {
   const role=res.locals.role;
   const id=res.locals.id;
   const name=res.locals.name;
 
   var canEdit = false;
-  var opportunity_id=req.params.opportunity_id;
+  var article_id=req.params.article_id;
   const options = {
     method: 'GET',
     headers: {
@@ -74,7 +74,7 @@ router.get('/:opportunity_id', auth, function(req, res, next) {
       'content-type': 'application/json'
     }};
     
-    var varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/opportunities/'+opportunity_id; //Setting uri based on user input
+    var varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/articles/'+article_id; //Setting uri based on user input
     
     fetch(varHttpRequest, options)
       .then(response => response.json())
@@ -85,13 +85,13 @@ router.get('/:opportunity_id', auth, function(req, res, next) {
         }
         else 
         {
-          opportunityInfo = data.opportunity;
-          var contentInfo = md.render(opportunityInfo.contents);
-          if(id === opportunityInfo.creator_id){
+          articleInfo = data.article;
+          var contentInfo = md.render(articleInfo.contents);
+          if(id === articleInfo.creator_id){
             canEdit = true;
           }
           console.log("canEdit", canEdit)
-          res.render('opportunityContent', { title: opportunityInfo.title, opportunity: opportunityInfo, content: contentInfo, canEdit:canEdit, role:role, id:id, name:name });
+          res.render('articleContent', { title: articleInfo.title, article: articleInfo, content: contentInfo, canEdit:canEdit, role:role, id:id, name:name });
         }
       })
       .catch(error => { //Error in the fetch

@@ -95,7 +95,7 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteOpportunityModal">
-  Delete Opportunity
+  Delete Article
 </button>
 
 <!-- Modal -->
@@ -103,12 +103,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteOpportunityModalLabel">Delete Opportunity</h5>
+        <h5 class="modal-title" id="deleteOpportunityModalLabel">Delete Article</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="<%= opportunity.opportunity_id%>/deleteOpportunity" method="POST">
+      <form action="<%= article.article_id%>/deleteOpportunity" method="POST">
       <div class="modal-body">
-        Would you like to delete the <%= opportunity.title %>?          
+        Would you like to delete the <%= article.title %>?          
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -121,12 +121,12 @@
 
 <% } %>
 
-  <h3>Title: <%= opportunity.title %></h3>
+  <h3>Title: <%= article.title %></h3>
   <br>
   <h5>Content: </h5> 
   <%- content %>
   <br>
-  <h6>Views: <%= opportunity.views %></h6>
+  <h6>Views: <%= article.views %></h6>
 
   <br>
   <br>

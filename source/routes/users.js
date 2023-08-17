@@ -61,4 +61,46 @@ router.post('/:userId/deleteUser', auth, async (req, res, next) => {
     })
   })
 
+
+  router.post('/:userId/editUser', auth, async (req, res, next) => {
+    const role=res.locals.role;
+    const id=res.locals.id;
+    const name=res.locals.name;
+
+    const newUser = {};
+    newUser.type = req.body.type;
+  
+    var newUserBody = JSON.stringify(newUser);
+    
+    console.log(newUserBody)
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Authorization': 'Bearer ' + process.env.BEARER_TOKEN,
+        'Content-Type': 'application/json'
+      },
+        body: newUserBody
+      };
+  
+      const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + req.params.userId; //Setting uri based on user input
+  
+      fetch(varHttpRequest, options)
+        .then(response => response.json())
+        .then(async data => {
+          if (data.success === false){  
+            res.render('error', { title: 'Error', message: 'Something Went Wrong', role:role, id:id, name:name});
+            return "error";
+          }
+          else 
+          {
+            res.redirect("/users");
+          }
+        })
+        .catch(error => { //Error in the fetch
+          console.error(error);
+          res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data, role:role, id:id, name:name });
+          return "error";
+        })
+      })
+
 module.exports = router;

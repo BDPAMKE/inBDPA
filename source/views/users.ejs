@@ -28,10 +28,10 @@
     <div class="table-responsive">
     <table class="table table-hover">
       <tr>
+        <th>Profile</th>
         <th>Username</th>
         <th>Email</th>
         <th>Type</th>
-        <th>User ID</th>
         <!-- <th>Blog Name</th> -->
       </tr>
       <%for (var result in resultarray){%>
@@ -49,18 +49,29 @@
         </td> 
         <td> <%= resultarray[result].email %> </td>
         <td> <%= resultarray[result].type %> </td>
-        <td> <li class="nav-item dropdown ">
-          <!-- Set up "title" for dropdown menu section -->
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Demote</a>
-          <!-- Set up options for dropdown section--> <!-- href links are temporary placeholders here-->
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" > Inner </a></li> <!-- First dropdown item-->
-            <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-            <li><a class="dropdown-item" > Staff </a></li> <!-- Second dropdown item-->
-            <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-          </ul>
-        </li> </td>
+        
+        <% if (resultarray[result].type != "administrator"){%>
+        <td> 
+          <form action="/users/<%= resultarray[result].user_id %>/editUser" method="POST">
+            <select id="type" name="type">
+              <option value="" disabled selected>Select your option</option>
+              <option value="inner">Inner</option>
+              <option value="staff">Staff</option>
+              <option value="administrator">Administrator</option>
+            </select>
+            <button type="submit" >Submit</button>
+          </form>
+    
+        </td>
+
+         <!-- This is the Delete Button for Change 10-->
+          <td>
+            <form action="/users/<%= resultarray[result].user_id %>/deleteUser" method="POST">
+              <button type="submit" >Delete</button>
+            </form>
+          </td>
+          <%}%>
+          
         </tr> 
         <%}%>
     </table>

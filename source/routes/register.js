@@ -136,6 +136,7 @@ router.get('/', auth, function (req, res, next) {
     .then(response => response.json())
     .then(data => {
       //console.log("Message & Data ", data);
+      console.log(newUserBody);
       res.render('register', { title: 'User Add Successful', message: data.message, data: data.data, role:role, id:id, name:name });
     })
     .catch(error => {

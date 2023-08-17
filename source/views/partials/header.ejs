@@ -21,6 +21,9 @@
           <% if (role != 'public') { %>
 
             <% if ((role==="staff") || (role==="administrator")){%>
+            <li class="nav-item">
+              <a class="nav-link-active custom-link" aria-current="page" href="/articles"> Articles </a>
+            </li>
             <li class="nav-item dropdown">
               <!-- Set up "title" for dropdown menu section -->
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,6 +39,9 @@
             <% } %>
 
             <% if ((role==="inner")){%>
+              <li class="nav-item">
+                <a class="nav-link-active custom-link" aria-current="page" href="/articles"> Articles </a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link-active custom-link" aria-current="page" href="/opportunities"> Opportunities </a>
               </li>

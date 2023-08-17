@@ -23,11 +23,11 @@
 
       <body style="background-color: hsl(0, 0%, 96%)">
 
-        <% var lastOpportunity = 0; %>
+        <% var lastArticle = 0; %>
 
-        <% if (opportunities !== null) { %> <%opportunities.forEach(function(opportunity){ %>
-          <% lastOpportunity = opportunity.opportunity_id; %>
-          <% const { time, created, updated } = utils.timeConverter(opportunity.createdAt, opportunity.updatedAt) %>
+        <% if (articles !== null) { %> <%articles.forEach(function(article){ %>
+          <% lastArticle = article.article_id; %>
+          <% const { time, created, updated } = utils.timeConverter(article.createdAt, article.updatedAt) %>
             <section>
             <div class="container py-5">
               <div class="row d-flex justify-content-center align-items-center">
@@ -37,10 +37,10 @@
                       <h2 class="fw-bold mb-2">
                         <div class="text-center">
                         <a
-                        href="/opportunities/<%= opportunity.opportunity_id%>"
-                        id="<% opportunity.opportunity_id %>"
+                        href="/articles/<%= article.article_id%>"
+                        id="<% article.article_id %>"
                         style="text-decoration: none; color: black"
-                        ><%= opportunity.title%></a
+                        ><%= article.title%></a
                         >
                       </div>
                       </h2>
@@ -48,7 +48,7 @@
                       <br>
 
                       <div class="row">
-                        <div class="text-center">Views: <%= opportunity.views %></div>
+                        <div class="text-center">Views: <%= article.views %></div>
                       </div>
                       <div class="row">
                         <div class="text-center">Created At: <%= created.toLocaleString('en-US') %></div>
@@ -69,7 +69,7 @@
                 </div>
           </section>
           <% }) %>
-          <a href="/opportunities?after=<%= lastOpportunity %>&prevafter=<%= after %>"> Next 10</a>
+          <a href="/articles?after=<%= lastArticle %>&prevafter=<%= after %>"> Next 10</a>
           <% }; %>
       <%- include('./partials/footer') -%> <!-- includes footer partial -->
     </body>
