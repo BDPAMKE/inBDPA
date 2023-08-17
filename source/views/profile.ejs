@@ -25,6 +25,36 @@
     <br>
     <br>
 
+    <h6>Username: <%= varUsername %></h6>
+    
+    <br>
+    
+    <h6>Email: <%= varEmail %></h6> 
+    
+    <br>
+
+    <img src="https://www.gravatar.com/avatar/
+    <%= varEmail.gravatar  %>
+    ?d=identicon">
+
+    <br>
+
+    <% if (varFullName == null) { %>
+      <h6>Full Name: N/A</h6> 
+    <% } else {%>
+      <h6>Full Name: <%= varFullName %></h6> 
+      <% } %>
+
+    <br>    
+    
+    <h6>Type: <%= varType %></h6> 
+
+    <br>
+
+    <h6>Views: <%= varViews %></h6> 
+
+    <br>
+
     <h6>About: <%= about %></h6> 
 
     <br>

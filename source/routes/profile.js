@@ -27,10 +27,6 @@ const { request } = require('http');
 
 /* GET users profile. */
 router.get('/', auth, async (req, res, next) => {
-  const role=res.locals.role;
-  const id=res.locals.id;
-  const name=res.locals.name;
-
   const userId = res.locals.result;
   res.redirect("/profile/" + userId)
   })
@@ -46,7 +42,11 @@ router.get('/:userName', function(req, res, next) {
   //This function will take the two variables and pass them to the Get RestAPI call 
    myGetRestCall.getWithBearerToken(url, token)
  .then(data => { console.log("user ", data)
-
+ varUsername = data.user.username; 
+  varEmail = data.user.email; 
+  varFullName = data.user.fullName;
+  varType = data.user.type;
+  varViews = data.user.views;
    varSections = JSON.stringify(data.user.sections)  
    varSections = JSON.parse(varSections)
    varEducation = varSections.education 
@@ -55,12 +55,11 @@ router.get('/:userName', function(req, res, next) {
    varSkills = varSections.skills  
    varAbout =  varSections.about 
        
-       res.render('profile', { title: 'Profile Page', about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
-       }
- )
+  res.render('profile', { title: 'Profile Page', varUsername:varUsername, varEmail:varEmail, varFullName:varFullName, varType:varType, varViews:varViews, 
+    about:varAbout,education:varEducation,experience:varExperience,skills:varSkills,volunteering:varVolunteering});
+  })
  .catch(error => console.error(error));
-     }
- );
+  });
 
  
 module.exports = router;
