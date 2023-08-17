@@ -18,6 +18,7 @@ var resttestRouter = require('./routes/resttest');
 var adminRouter = require('./routes/admin');
 var connectcountRouter = require('./routes/connectcount');
 var opportunitiesRouter = require('./routes/opportunities');
+var myArticlesRouter = require('./routes/myArticles');
 var myOpportunitiesRouter = require('./routes/myOpportunities');
 var profileRouter = require('./routes/profile');
 var profileEditRouter = require('./routes/profileedit');
@@ -41,6 +42,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/myArticles', myArticlesRouter);
 app.use('/articles', articlesRouter);
 app.use('/users', usersRouter);
 app.use('/systemData', systemDataRouter);

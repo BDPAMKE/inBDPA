@@ -12,10 +12,6 @@ router.get('/', auth, async (req, res, next) => {
   const role=res.locals.role;
   const id=res.locals.id;
   const name=res.locals.name;
-  
-  var afterpoint=req.query.after;
-  var prevafter=req.query.prevafter;
-  var articleInfo = [];
 
     const options = {
     method: 'GET',
@@ -26,16 +22,9 @@ router.get('/', auth, async (req, res, next) => {
     
     var varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/articles'; //Setting uri based on user input
 
-    if (afterpoint != null){
-        varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/articles?after=' + afterpoint; //Setting uri based on user input
-    }
-    else{
-      afterpoint=0; //set default afterpoint
-    }
     fetch(varHttpRequest, options)
       .then(response => response.json())
       .then(async data => {
-        console.log("link", varHttpRequest)
         console.log("data", data)
         if (data.success === false){  
           res.render('error', { title: 'Error', message: 'Something Went Wrong', role:role, id:id, name:name});
@@ -44,11 +33,7 @@ router.get('/', auth, async (req, res, next) => {
         else 
         {
           articleInfo = data.articles;
-          var articleList=[]
-          for (var i=0; i<10; i++){
-            articleList[i]=articleInfo[i];
-          }
-          res.render('articles', { title: 'Articles', articles: articleList, after: afterpoint, prevafter: prevafter, utils: myScripts, role:role, id:id, name:name });
+          res.render('articles', { title: 'Articles', articles: articleInfo, utils: myScripts, role:role, id:id, name:name });
         }
       })
       .catch(error => { //Error in the fetch
