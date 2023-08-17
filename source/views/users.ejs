@@ -34,11 +34,25 @@
         </td> 
         <td> <%= resultarray[result].email %> </td>
         <td> <%= resultarray[result].type %> </td>
-        <td> <%= resultarray[result].user_id %> </td>
+        <td> <li class="nav-item dropdown ">
+          <!-- Set up "title" for dropdown menu section -->
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Demote</a>
+          <!-- Set up options for dropdown section--> <!-- href links are temporary placeholders here-->
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" > Inner </a></li> <!-- First dropdown item-->
+            <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
+            <li><a class="dropdown-item" > Staff </a></li> <!-- Second dropdown item-->
+            <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
+          </ul>
+        </li> </td>
         </tr> 
         <%}%>
     </table>
     </div>
+      <!--Dropdown Menu inside a Navigation Bar
+          Hover over the "Dropdown" link to see the dropdown menu. -->
+
       
     <%- include('./partials/footer') -%> <!-- includes footer partial -->
   </body>
