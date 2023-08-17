@@ -114,7 +114,7 @@ router.post('/', auth, async(req, res, next) => {
         //console.log("Salt=",saltString);
         //console.log("Key=",keyString);
   //Set node-fetch for authing users
-  const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/users/'+userID+'/auth' ; //Setting uri based on user input
+  const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users/'+userID+'/auth' ; //Setting uri based on user input
   //console.log(varHttpRequest);
   var body={key:keyString};
   fetch(varHttpRequest, {
@@ -173,7 +173,7 @@ router.post('/', auth, async(req, res, next) => {
     };
 
     const fetch = require('node-fetch');
-    const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/users/'+req.body.uname ; //Setting uri based on user input
+    const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users/'+req.body.uname ; //Setting uri based on user input
     console.log(varHttpRequest);
     fetch(varHttpRequest, {
         method: 'GET',

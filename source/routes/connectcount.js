@@ -14,7 +14,7 @@ const name=res.locals.name;
 
 //############# Start  increment Views Count #####################   
  const data = '{"views":"increment"}'; 
- const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/'+ global.userID 
+ const url = 'https://inbdpa.api.hscc.bdpa.org/v2/users/'+ global.userID 
  var body=data;
 fetch(url, {
 method: 'PATCH',
@@ -33,7 +33,7 @@ router.post('/', auth, function (req, res, next) {
     const role=res.locals.role;
     const id=res.locals.id;
     const name=res.locals.name;
-    const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + req.body.username; //- where the URL is whatever Get RestAPI Request  you are calling
+    const url = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + req.body.username; //- where the URL is whatever Get RestAPI Request  you are calling
     const token = process.env.BEARER_TOKEN;
     console.log("body", req.body.username)
     //This function will take the two variables and pass them to the Get RestAPI call 
@@ -42,7 +42,7 @@ router.post('/', auth, function (req, res, next) {
             //console.log('data',data);
             //console.log('datasuccess', data.success);
             var userid = data.user.user_id;
-            const url = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + userid + '/connections'; //- where the URL is whatever Get RestAPI Request  you are calling
+            const url = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + userid + '/connections'; //- where the URL is whatever Get RestAPI Request  you are calling
             const token = process.env.BEARER_TOKEN;
             //This function will take the two variables and pass them to the Get RestAPI call 
             myGetRestCall(url, token)

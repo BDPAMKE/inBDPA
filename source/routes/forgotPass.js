@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
       'content-type': 'application/json'
     }};
 
-    const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/users/' + username; //Setting uri based on user input
+    const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users/' + username; //Setting uri based on user input
     
     fetch(varHttpRequest, options)
       .then(response => response.json())

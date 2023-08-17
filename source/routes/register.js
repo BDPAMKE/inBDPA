@@ -123,7 +123,7 @@ router.get('/', auth, function (req, res, next) {
       var newUserBody=JSON.stringify(newUser);
       //console.log("generator call", newUserBody);
         const fetch = require('node-fetch'); //We may need to npm install this...
-      const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/users';
+      const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users';
     fetch(varHttpRequest, {
       method: 'POST',
       headers: {

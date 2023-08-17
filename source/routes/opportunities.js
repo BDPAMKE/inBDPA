@@ -30,10 +30,10 @@ router.get('/', auth, async (req, res, next) => {
       'content-type': 'application/json'
     }};
     
-    var varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities'; //Setting uri based on user input
+    var varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/opportunities'; //Setting uri based on user input
 
     if (afterpoint != null){
-        varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities?after=' + afterpoint; //Setting uri based on user input
+        varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/opportunities?after=' + afterpoint; //Setting uri based on user input
     }
     else{
       afterpoint=0; //set default afterpoint
@@ -80,7 +80,7 @@ router.get('/:opportunity_id', auth, function(req, res, next) {
       'content-type': 'application/json'
     }};
     
-    var varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities/'+opportunity_id; //Setting uri based on user input
+    var varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/opportunities/'+opportunity_id; //Setting uri based on user input
     
     fetch(varHttpRequest, options)
       .then(response => response.json())
@@ -122,7 +122,7 @@ router.get('/:opportunity_id', auth, function(req, res, next) {
         }
       };
   
-      const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities/' + req.params.opportunityId; //Setting uri based on user input
+      const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/opportunities/' + req.params.opportunityId; //Setting uri based on user input
       
       fetch(varHttpRequest, options)
         .then(response => response.json())
@@ -164,7 +164,7 @@ router.get('/:opportunity_id', auth, function(req, res, next) {
             body: newOpportunityBody
           };
       
-          const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/opportunities/' + req.params.opportunityId; //Setting uri based on user input
+          const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/opportunities/' + req.params.opportunityId; //Setting uri based on user input
       
           fetch(varHttpRequest, options)
             .then(response => response.json())

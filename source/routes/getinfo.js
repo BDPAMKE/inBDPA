@@ -9,7 +9,7 @@ router.get('/', auth, function(req, res, next) {
   const id=res.locals.id;
   const name=res.locals.name;
 
- const url = 'https://inbdpa.api.hscc.bdpa.org/v1/info' //- where the URL is whatever Get RestAPI Request  you are calling
+ const url = 'https://inbdpa.api.hscc.bdpa.org/v2/info' //- where the URL is whatever Get RestAPI Request  you are calling
  const token = process.env.BEARER_TOKEN;
 
   //########################################## 
