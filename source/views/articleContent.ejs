@@ -16,43 +16,10 @@
         </script>
         
         <%- include("./partials/header.ejs") %>
-
-        <!-- <script type="text/javascript">
-          window.addEventListener("beforeunload", async (event) => {
-            var session_id = document.getElementById("holdValue").value;
-            console.log("sessionId", session_id);
-
-            const options = {
-              method: 'DELETE',
-              headers: {
-                'Authorization': 'Bearer ' + "cf2b6b81-937f-4bed-b168-dd3fd6122c63",
-                'Content-Type': 'application/json'
-              },
-            };
-        
-            const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/sessions/' + session_id; //Setting uri based on user input
-            
-            console.log("STOPPING THIS SESSION", varHttpRequest)
-            await fetch(varHttpRequest, options)
-              .then(response => response.json())
-              .then(async data => {
-                if (data.success === false){
-                  console.log("Error")  
-                  return "error";
-                }
-                else{
-                  console.log("Session Ended!!!") 
-                }
-              })
-              .catch(error => { //Error in the fetch
-                console.error(error);
-                return "error";
-              })
-          });
-        </script> -->
         
         <title><%= title %></title>
       </head>
+      
 <body style="background-color: hsl(0, 0%, 96%)">
 
   <br>
@@ -62,7 +29,7 @@
 
 
   <!-- Button -->
-<a href="/opportunities">
+<a href="/articles">
 <button type="button" class="btn btn-primary" >
   Back
 </button>
@@ -73,42 +40,42 @@
 
 <% if (canEdit === true) { %>
   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editOpportunityModal">
-  Edit Opportunity
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editArticleModal">
+  Edit Article
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="editOpportunityModal" tabindex="-1" aria-labelledby="editOpportunityModalLabel" aria-hidden="true">
+<div class="modal fade" id="editArticleModal" tabindex="-1" aria-labelledby="editArticleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editOpportunityModalLabel">Edit Opportunity</h5>
+        <h5 class="modal-title" id="editArticleModalLabel">Edit Article</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="<%= opportunity.opportunity_id%>/editOpportunity" method="POST">
+        <form action="<%= article.article_id%>/editArticle" method="POST">
           <div class="modal-body">
-            Would you like to edit the <%= opportunity.title %>?          
+            Would you like to edit the <%= article.title %>?          
           </div>
-          <!-- Opportunity Title input -->
+          <!-- Article Title input -->
           <div class="form-outline mb-4">
-            <label class="form-label" for="">Opportunity Title</label>
+            <label class="form-label" for="">Article Title</label>
             <input
               type="text"
-              name="editOpportunityTitle"
-              id="editOpportunityTitle"
+              name="editArticleTitle"
+              id="editArticleTitle"
               class="form-control"
               value=""
             />
           </div>
 
-          <!-- Opportunity Content input -->
+          <!-- Article Content input -->
           <div class="form-outline mb-4">
-           <label class="form-label" for="">Opportunity Content</label>
+           <label class="form-label" for="">Article Content</label>
            <input
              type="text"
-             name="editOpportunityContent"
-             id="editOpportunityContent"
+             name="editArticleContent"
+             id="editArticleContent"
              class="form-control"
              value=""
            />
@@ -127,21 +94,21 @@
 </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteOpportunityModal">
-  Delete Opportunity
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteArticleModal">
+  Delete Article
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="deleteOpportunityModal" tabindex="-1" aria-labelledby="deleteOpportunityModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteArticleModal" tabindex="-1" aria-labelledby="deleteArticleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteOpportunityModalLabel">Delete Opportunity</h5>
+        <h5 class="modal-title" id="deleteArticleModalLabel">Delete Article</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="<%= opportunity.opportunity_id%>/deleteOpportunity" method="POST">
+      <form action="<%= article.article_id%>/deleteArticle" method="POST">
       <div class="modal-body">
-        Would you like to delete the <%= opportunity.title %>?          
+        Would you like to delete the <%= article.title %>?          
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -154,12 +121,12 @@
 
 <% } %>
 
-  <h3>Title: <%= opportunity.title %></h3>
+  <h3>Title: <%= article.title %></h3>
   <br>
   <h5>Content: </h5> 
   <%- content %>
   <br>
-  <h6>Views: <%= opportunity.views %></h6>
+  <h6>Views: <%= article.views %></h6>
 
   <br>
   <br>

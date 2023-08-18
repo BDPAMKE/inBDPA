@@ -6,14 +6,18 @@ const { env } = require('process');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('register', { title: 'Register' });
+
+router.get('/', auth, function (req, res, next) {
+  const role=res.locals.role;
+  const id=res.locals.id;
+  const name=res.locals.name;
+  res.render('register', { title: 'Register', role:role, id:id, name:name });
 });
 
-  router.post('/', async(req, res, next) => {
-    console.log(JSON.stringify(req.body));
-  
-    
+  router.post('/', auth, async(req, res, next) => {
+    const role=res.locals.role;
+    const id=res.locals.id;
+    const name=res.locals.name;
     // The API expects a 64 byte key (128 hex digits long):
   const KEY_SIZE_BYTES = 64;
   // The API expects a 16 byte salt (32 hex digits long):
@@ -50,7 +54,7 @@ router.get('/', function(req, res, next) {
   };
   
   // Turns a password (string) and salt (buffer) into a key and salt (hex strings)
-  const deriveKeyFromPassword = async (passwordString, body, creator, saltBuffer) => {
+  const deriveKeyFromPassword = async (passwordString, body, saltBuffer) => {
     // We'll use a TextEncoder to convert strings into arrays of bytes:
     const textEncoder = new TextEncoder('utf-8');
   
@@ -113,13 +117,14 @@ router.get('/', function(req, res, next) {
     const newUser = {};
       newUser.username=body.username;
       newUser.email=body.email;
+      newUser.fullName=body.fullName;
       newUser.salt=saltString;
       newUser.key=keyString;
-      newUser.type="inner";
+      newUser.type=body.type;
       var newUserBody=JSON.stringify(newUser);
-      //console.log("generator call", newUserBody);
+      console.log("generator call", newUserBody);
         const fetch = require('node-fetch'); //We may need to npm install this...
-      const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v1/users';
+      const varHttpRequest = 'https://inbdpa.api.hscc.bdpa.org/v2/users';
     fetch(varHttpRequest, {
       method: 'POST',
       headers: {
@@ -131,12 +136,13 @@ router.get('/', function(req, res, next) {
     .then(response => response.json())
     .then(data => {
       //console.log("Message & Data ", data);
-      res.render('register', { title: 'User Add Successful', message: data.message, data: data.data });
+      console.log(newUserBody);
+      res.render('register', { title: 'User Add Successful', message: data.message, data: data.data, role:role, id:id, name:name });
     })
     .catch(error => {
       console.error(error);
       console.log(newUserBody);
-      res.render('register', { title: 'User Add Error', message: error.message, data: error.data });
+      res.render('register', { title: 'User Add Error', message: error.message, data: error.data, role:role, id:id, name:name });
       return "error";
     })
    
@@ -146,7 +152,7 @@ router.get('/', function(req, res, next) {
     // Get the salt and key from our password submitted
     passwordString=req.body.password;
     //console.log("PW=",passwordString);
-    const { keyString, saltString } = await deriveKeyFromPassword(passwordString, req.body, "bdpa_adminscott");
+    const { keyString, saltString } = await deriveKeyFromPassword(passwordString, req.body);
     //console.log("keystring", keyString);
   
   

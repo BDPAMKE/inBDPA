@@ -22,19 +22,38 @@
     <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
     <h1 class="text-center">  <%= title %></h1>
     <p class="text-center"> Welcome to <%= title %></p>
-    
-        <form <form class="form-horizontal"  name="about" action="/profileedit"  method="post"> 
+    <a href="/profilepic">edit profile picture?</a></span>
+        <form class="form-horizontal"  name="about" action="/profileedit"  method="post"> 
          
           <tr>
-            <td>About</td> <td><input type="text" id="about" name=about value = "<%= about %>" </td><td><button  type="submit">Update About</button></td>
+            <td>About</td> <td><input type="text" id="about" name=about placeholder = "type here" </td><td><button  type="submit">Update About</button></td>
             <input type ="text" hidden id="process" name=process value = "about">
 
           </form>
           </div>  
-        
-    </tr>
+        </tr>
+        <form class="form-horizontal"  name="email" action="/profileedit"  method="post"> 
+         
+          <tr>
+            <td>Email</td> <td><input type="text" id="email" name=email placeholder = "type here" </td><td><button  type="submit">Update Email</button></td>
+            <input type ="text" hidden id="process" name=process value = "email">
+
+          </form>
+          </div>  
+        </tr>
+  
+        <form class="form-horizontal"  name="fullname" action="/profileedit"  method="post"> 
+         
+          <tr>
+            <td>FullName</td> <td><input type="text" id="fullname" name=fullname placeholder = "type here" </td><td><button  type="submit">Update Full Name</button></td>
+            <input type ="text" hidden id="process" name=process value = "fullname">
+
+          </form>
+          </div>  
+        </tr>
+
       <tr>
-        <form <form class="form-horizontal"  name="Education" action="/profileedit"  method="post"> 
+        <form class="form-horizontal"  name="Education" action="/profileedit"  method="post"> 
           <div class="table-responsive">
           <table class="table table-hover" >
             <tr>
@@ -53,9 +72,9 @@
         <%for (var result in education){%>
           <td></td>
           <td><%=result  %></td>
-          <td><input type="textarea"  id="title" name=title value = "<%= education[result].title %>" >   </td>
+          <td><input type="textarea"  id="title" name=title value = "<%= education[result].title %>" ></td>
           <td><input type="textarea"   id="location" name=location value = "<%= education[result].location %>" > </td>
-          <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= education[result].description %>"   > </td>
+          <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= education[result].description %>"> </td>
           <input type ="text" hidden id="process" name=process value = "education">
        </tr>
           
@@ -67,7 +86,7 @@
     </div>
     <hr/> 
     <hr/> 
-    <form <form class="form-horizontal"  name="Experience"  action="/profileedit"  method="post"> 
+    <form class="form-horizontal"  name="Experience"  action="/profileedit"  method="post"> 
       <div class="table-responsive">
       <table class="table table-hover" >
         <tr>
@@ -86,7 +105,7 @@
             <td><%=result  %></td>
             <td><input type="textarea"  id="title" name=title value = "<%= experience[result].title %>" >   </td>
             <td><input type="textarea"   id="location" name=location value = "<%= experience[result].location %>" > </td>
-            <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= experience[result].description %>"   > </td>
+            <td><input type="textarea" row="10" maxlength="500"  id="description" name=description value = "<%= experience[result].description %>"> </td>
             <input type ="text" hidden id="process" name=process value = "experience">
          </tr>
             
@@ -94,7 +113,7 @@
         </div>  
       </table>
       
-        <form <form class="form-horizontal" name="Volunteering"  action="/profileedit"  method="post"> 
+        <form class="form-horizontal" name="Volunteering"  action="/profileedit"  method="post"> 
           <div class="table-responsive">
           <table class="table table-hover" >
             <tr>
@@ -120,7 +139,7 @@
             <%}%> 
             </div>  
           </table>
-          <form <form class="form-horizontal" name="Skills"  action="/profileedit"  method="post"> 
+          <form class="form-horizontal" name="Skills"  action="/profileedit"  method="post"> 
             <div class="table-responsive">
             <table class="table table-hover" >
               <tr>

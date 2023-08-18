@@ -30,43 +30,55 @@
 
       <body style="background-color: hsl(0, 0%, 96%)">
   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addOpportunityModal">
-    Add Opportunity
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addArticleModal">
+    Add Article
   </button>
   
   <!-- Modal -->
-  <div class="modal fade" id="addOpportunityModal" tabindex="-1" aria-labelledby="addOpportunityModalLabel" aria-hidden="true">
+  <div class="modal fade" id="addArticleModal" tabindex="-1" aria-labelledby="addArticleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="addOpportunityModalLabel">Add Opportunity</h5>
+          <h5 class="modal-title" id="addArticleModalLabel">Add Article</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="/myOpportunities" method="POST">
-            <!-- Opportunity Title input -->
+          <form action="/myArticles" method="POST">
+            <!-- Article Title input -->
             <div class="form-outline mb-4">
-              <label class="form-label" for="">Opportunity Title</label>
+              <label class="form-label" for="">Article Title</label>
               <input
                 type="text"
-                name="createOpportunityTitle"
-                id="createOpportunityTitle"
+                name="createArticleTitle"
+                id="createArticleTitle"
                 class="form-control"
                 value=""
               />
             </div>
 
-            <!-- Opportunity Content input -->
+            <!-- Article Content input -->
             <div class="form-outline mb-4">
-             <label class="form-label" for="">Opportunity Content</label>
+             <label class="form-label" for="">Article Content</label>
              <input
                type="text"
-               name="createOpportunityContent"
-               id="createOpportunityContent"
+               name="createArticleContent"
+               id="createArticleContent"
                class="form-control"
                value=""
              />
            </div>
+
+           <!-- Article Keywords input -->
+           <div class="form-outline mb-4">
+            <label class="form-label" for="">Article Keywords</label>
+            <input
+              type="text"
+              name="createArticleKeywords"
+              id="createArticleKeywords"
+              class="form-control"
+              value=""
+            />
+          </div>
    
            <br>
 
@@ -82,8 +94,8 @@
     </div>
   </div>
 
-        <% if (opportunities !== null) { %> <%opportunities.forEach(function(opportunity){%>
-          <% const { time, created, updated } = utils.timeConverter(opportunity.createdAt, opportunity.updatedAt) %>
+        <% if (articles !== null) { %> <%articles.forEach(function(article){%>
+          <% const { time, created, updated } = utils.timeConverter(article.createdAt, article.updatedAt) %>
             <section>
             <div class="container py-5">
               <div class="row d-flex justify-content-center align-items-center">
@@ -93,10 +105,10 @@
                       <h2 class="fw-bold mb-2">
                         <div class="text-center">
                         <a
-                        href="/opportunities/<%= opportunity.opportunity_id%>"
-                        id="<% opportunity.opportunity_id %>"
+                        href="/articles/<%= article.article_id%>"
+                        id="<% article.article_id %>"
                         style="text-decoration: none; color: black"
-                        ><%= opportunity.title%></a
+                        ><%= article.title%></a
                         >
                       </div>
                       </h2>
@@ -104,7 +116,7 @@
                       <br>
 
                       <div class="row">
-                        <div class="text-center">Views: <%= opportunity.views %></div>
+                        <div class="text-center">Views: <%= article.views %></div>
                       </div>
                       <div class="row">
                         <div class="text-center">Last Viewed: <%= time %> ago %> </div>

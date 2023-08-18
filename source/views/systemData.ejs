@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head') -%> <!-- head partial -->
+  </head>
+  <body>
+    <%- include('./partials/header') -%> 
+    <h1><%= title %></h1>
+    <p>There are a total of...</p> 
+      <p><%= articles %> Articles</p>
+      <p><%= opportunities %> Opportunities</p>
+      <p><%= sessions %> Sessions</p>
+      <p><%= users %> Users</p>
+      <p><%= views %> Views</p>
+
+    <br>
+    <br>
+
+    <p>There are a total of...</p> 
+    <br>
+    <p><%= numHome %> <a href="/">Home Sessions </a></p>
+    <br>
+    <p><%= numOpportunity %> <a href="/opportunities">Opportunity</a> Sessions </p>
+    <br>  
+    <p><%= numArticle %> <a href="/articles">Article</a> Sessions</p>   
+    <br>
+    <p><%= numAuth %> <a href="/login">Auth</a> Sessions</p>
+    <br>
+    <p><%= numAdmin %> <a href="/admin">Admin</a> Sessions</p>
+    <br>
+    <p><%= numProfile %> <a href="/profile">Profile Sessions</a> </p>  
+  </body>
+</html>

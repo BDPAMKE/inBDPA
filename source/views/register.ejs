@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-<%- include('./partials/head') -%>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%- include('./partials/head') -%> <!-- head partial -->
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+  rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+  crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+  integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+</script>
+
 <script>
     function GenerateCaptcha(){
       var num1=Math.floor((Math.random()*10)+1);
@@ -28,59 +38,106 @@
             registerform.reset();
             return false;
         }
-
     }
     </script>
 </head>
 
-<body onload="GenerateCaptcha()">
-<header>
-<%- include('./partials/header') -%>
-</header>
+<body onload="GenerateCaptcha()" style="background-color: hsl(0, 0%, 96%)">
+  <%- include("./partials/header.ejs") %>
+<section>
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <h1 class="my-5 display-3 fw-bold ls-tight">
+              Register for <span class="text-primary">Opportunities</span>
+            </h1>
+            <p style="color: hsl(217, 10%, 50.8%)">
+              inBDPA: The one stop shop to support your networking needs
+            </p>
+          </div>
+  
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <form name="registerform" id="registerform" action="/register" onsubmit="return CheckCaptcha()" method="POST">
+                
+                  <!-- Username input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" aria-describedby="usernameHelp" required />
+                    <small id="usernameHelp" class="form-text text-muted">Alphanumeric (a-z, A-Z, 0-9)  or "-", or "_".</small>
+                  </div>
 
-<div class="container my-5">
-<div class="row">
-<div class="col-md-6 mx-auto">
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required />
+                  </div>
 
-<form name="registerform" id="registerform" action="/register" onsubmit="return CheckCaptcha()" method="POST">
-
-<h1 class="h3 mb-3 fw-normal">Please Register Below</h1>
-
-
-<div class="form-floating">
-<input type="text" class="form-control" id="username" name="username" placeholder="User Name"  required>
-<label for="username">User Name</label>
-</div>
-
-<div class="form-floating">
-<input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
-<label for="email">Email address</label>
-</div>
-
-<div class="form-floating">
-<input type="password" class="form-control" id="password" name="password" placeholder="Password"  maxlength="25" requiredlength="5"
- title="Password must be at least 11 characters 11. A strong password is above 17 characters." required>
-<label for="password">Password</label>
-</div>
-
-<div class="form-floating">
-    <input type="number" class="form-control" id="captchanumber" name="captchanumber" placeholder=""  maxlength="25"
-     required>
-    <label for="captchanumber">Calculate <span id="num1"> 1 </span> + <span id="num2"> 2 </span> = </label>
+                  <!-- Full Name input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" class="form-control" required />
+                  </div>
+  
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" maxlength="25" requiredlength="5"
+                    title="Password must be at least 11 characters 11. A strong password is above 17 characters." required />
+                  </div>
+                  
+                  <% if (role == "administrator") { %>
+                    <!-- Type input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="type">Type</label>
+                    <select id="type" name="type">
+                      <option value="inner">Inner</option>
+                      <option value="staff">Staff</option>
+                      <option value="administrator">Administrator</option>
+                    </select>
+                  </div>
+                  <% } %>
+  
+                  <!-- Captcha input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="captchanumber">Calculate <span id="num1"> 1 </span> + <span id="num2"> 2 </span> = </label>
+                    <input type="number" id="captchanumber" name="captchanumber" class="form-control" maxlength="25" required />
+                  </div>
+  
+                  <!-- Checkbox -->
+                  <div class="form-check d-flex justify-content-center mb-4">
+                    <label class="form-check-label" for="remember">Remember Me</label>
+                    <input class="form-check-input me-2" type="checkbox" value="" id="remember" name="remember" checked />
+                  </div>
+  
+                  <!-- Submit button -->
+                  <div class="align-items-center">
+                    <button type="submit" class="btn btn-primary btn-block">
+                      Register
+                    </button>
+                  </div>
+  
+                  <!-- Register buttons -->
+                  <div class="text-center">
+                    <p>Already have an account? <a href="/login">login</a></p>
+                    <p>Forgot <a href="/forgotPass">password?</a>?</p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-<button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
-<span class="psw">Forgot <a href="/forgotPass">password?</a></span>
-</form>
-
-</div>
-</div>
-</div>
+  <br>
 
 <footer>
 <%- include('./partials/footer') -%>
 </footer>
 
 </body>
-
 </html>
